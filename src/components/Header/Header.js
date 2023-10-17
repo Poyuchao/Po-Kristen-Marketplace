@@ -1,31 +1,6 @@
 import React,{useState} from "react";
+import navlinks from "..";  // import navlinks from index page
 
-const navlinks = [
-    {
-        title: "Home",
-        link: "/",
-    },
-    {
-        title: "About Us",
-        link: "/about",
-    },
-    {
-        title: "Product Menu",
-        link: "/products",
-    },
-    {
-        title: "Contact Us",
-        link: "/contact",
-    },
-    {
-        title: "Login",
-        link: "/login",
-    },
-    {
-        title: "Cart",
-        link: "/Cart",
-    },
-];
 
 const Header = () => {
     // initialize open is false
