@@ -28,8 +28,9 @@ const navlinks = [
 ];
 
 const Header = () => {
+    // initialize open is false
     const [open, setOpen] = useState(false);
-
+    // setopen to its opposite side
     const toggleMenu = () => {
         setOpen(!open);
     };
@@ -64,7 +65,10 @@ const Header = () => {
                             ))}
                         </div>
                     </div>
-                    {/* Hamburger Menu Button */}
+
+                    {/* Hamburger Menu Button In this segment, the md:hidden class hides the element (hamburger button)
+                     once the screen size matches the "medium" breakpoint. This means that the hamburger button is only 
+                     visible on screens smaller than the "medium" breakpoint, which makes it appear for mobile views.*/}
                     <div className="md:hidden">
                         <button
                             // This button displays the hamburger icon. When it's clicked, it calls the toggleMenu function, 
