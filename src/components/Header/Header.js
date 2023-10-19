@@ -22,7 +22,7 @@ const Header = () => {
                             className="h-20 w-20"
                         />
                         {/* Store name */}
-                        <a href="/" className="text-white ml-3 text-xl">
+                        <a href="/" className="text-white ml-3 text-2xl">
                             The Good Stuff
                         </a>
                     </div>
