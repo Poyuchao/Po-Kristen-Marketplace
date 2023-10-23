@@ -588,6 +588,10 @@ video {
   visibility: visible;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -609,8 +613,20 @@ video {
   left: 50%;
 }
 
+.left-\[467px\] {
+  left: 467px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
 .top-1\/2 {
   top: 50%;
+}
+
+.top-\[207px\] {
+  top: 207px;
 }
 
 .top-full {
@@ -694,6 +710,10 @@ video {
   margin-top: 2rem;
 }
 
+.mt-\[-1\.00px\] {
+  margin-top: -1.00px;
+}
+
 .block {
   display: block;
 }
@@ -726,6 +746,18 @@ video {
   height: 1.5rem;
 }
 
+.h-\[280px\] {
+  height: 280px;
+}
+
+.h-\[74px\] {
+  height: 74px;
+}
+
+.h-\[802px\] {
+  height: 802px;
+}
+
 .min-h-max {
   min-height: -webkit-max-content;
   min-height: max-content;
@@ -747,6 +779,18 @@ video {
   width: 1.5rem;
 }
 
+.w-\[1600px\] {
+  width: 1600px;
+}
+
+.w-\[625px\] {
+  width: 625px;
+}
+
+.w-\[712px\] {
+  width: 712px;
+}
+
 .w-full {
   width: 100%;
 }
@@ -757,6 +801,10 @@ video {
 
 .flex-1 {
   flex: 1 1 0%;
+}
+
+.flex-\[0_0_auto\] {
+  flex: 0 0 auto;
 }
 
 .flex-grow {
@@ -806,6 +854,14 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-\[32px\] {
+  gap: 32px;
+}
+
+.gap-\[40px\] {
+  gap: 40px;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -985,6 +1041,14 @@ video {
   line-height: 2.5rem;
 }
 
+.text-\[20px\] {
+  font-size: 20px;
+}
+
+.text-\[86px\] {
+  font-size: 86px;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1003,8 +1067,29 @@ video {
   font-weight: 500;
 }
 
+.font-normal {
+  font-weight: 400;
+}
+
 .font-semibold {
   font-weight: 600;
+}
+
+.leading-\[32px\] {
+  line-height: 32px;
+}
+
+.leading-\[96px\] {
+  line-height: 96px;
+}
+
+.tracking-\[0\] {
+  letter-spacing: 0;
+}
+
+.text-\[\#2b2e23\] {
+  --tw-text-opacity: 1;
+  color: rgb(43 46 35 / var(--tw-text-opacity));
 }
 
 .text-black {
@@ -1079,6 +1164,14 @@ video {
 
 .duration-500 {
   transition-duration: 500ms;
+}
+
+.\[font-family\:\'DM_Sans-Regular\'\2c Helvetica\] {
+  font-family: 'DM Sans-Regular',Helvetica;
+}
+
+.\[font-family\:\'Playfair_Display-Regular\'\2c Helvetica\] {
+  font-family: 'Playfair Display-Regular',Helvetica;
 }
 
 .hover\:bg-gray-300:hover {
