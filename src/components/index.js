@@ -16,10 +16,10 @@ const navlinks = [
         title: "Product Menu",
         link: "/products",
     },
-    {
-        title: "Contact Us",
-        link: "/contact",
-    },
+    // {
+    //    title: "Register",
+    //    link: "/register",
+    //},
     {
         title: "Login",
         link: "/login",
