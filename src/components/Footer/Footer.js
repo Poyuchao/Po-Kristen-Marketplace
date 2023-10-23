@@ -1,35 +1,51 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
-    return(
-    <footer className="bg-gray-800 text-white" >
-        <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
-            <h1 className="lg:text-4xl text-xl md:bm-0 mb-6 lg:leading-normal font-semibold
-            md:w-2/5"><span className="text-teal-400">Free</span> until you're ready to launch
-            </h1>
-       
-        
-        <div className="items-center">
-            <input 
-                type="text" 
-                placeholder="Enter Your ph.no" 
-                className="text-gray-800
-                sm:w-72 w-full sm:mr-5 mr-4 lg:mb-2 mb-4 py-2.5 rounded px-2 focus:outline-none"/>
+    return (
+        <footer className="bg-[#474747] text-white py-8">
+            <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+                {/* Logo */}
+                <div className="flex justify-center md:justify-start items-center">
+                    <img src="logo192.png" alt="Logo" className="mb-4 w-32 md:w-40 h-32 md:h-40 object-cover" />
+                </div>
+
+                {/* Description */}
+                <div>
+                    <p className="text-sm md:text-base text-center md:text-left">Welcome to Taiwan Good Stuff, your passport to the delectable world of Taiwanese flavors. Explore our diverse array of savory and sweet treats and mouthwatering pastries. Discover the taste of Taiwan, one tasty bite at a time.</p>
+                </div>
+                
+                {/* Product categories */}
+                <div className="text-center md:text-left">
+                    <div className="text-lg font-bold mb-2">Product</div>
+                    <div className="space-y-2">
+                        <div>Cookies</div>
+                        <div>Sweets</div>
+                        <div>Pastries</div>
+                        <div>Drinks</div>
+                    </div>
+                </div>
+
+                {/* Social media icons */}
+                <div className="text-center md:text-right">
+                    <div className="text-lg font-bold mb-2">Follow Me</div>
+                    <div className="flex justify-center md:justify-end space-x-4">
+                        <FontAwesomeIcon icon={faGithub} className="w-6 h-6 mx-2 hover:text-[#333]" />
+                        <FontAwesomeIcon icon={faLinkedin} className="w-6 h-6 mx-2 hover:text-[#0072b1]" />
+                        <FontAwesomeIcon icon={faTwitter} className="w-6 h-6 mx-2 hover:text-[#1da1f2]" />
+                    </div>
+                </div>
+
+            </div>
             
-            <button className="bg-teal-400 hover:bg-teal-500 duration-300 px-5 py-2.5 font-[Poppins]
-            rounded-md text-white md:w-auto w-full ">
-                Request Code
-            </button>
-
-        </div>
-        
-        </div>
-
-      
-    </footer>
+            {/* Copyright */}
+            <div className="mt-8 text-center border-t border-gray-700 pt-4">
+                Copyright © 2023 TaiwanGoodStuff. All Rights Reserved.
+            </div>
+        </footer>
     );
- 
 };
 
 export default Footer;
-
