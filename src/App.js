@@ -6,6 +6,9 @@ import {Home,Contact} from "./pages"
 import { Header,Footer } from './components';
 
 
+
+
+
 function App() {
   return (
     // sticky the footer at the bottom of web
@@ -21,9 +24,10 @@ function App() {
       </Routes>
 
     </div>
+  
+      <Footer/>
 
-    <Footer/>
-    </BrowserRouter>
+      </BrowserRouter>
 
     </div>
 

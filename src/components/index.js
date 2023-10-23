@@ -7,15 +7,15 @@ const navlinks = [
         link: "/",
     },
     {
-        title: "About Us",
+        title: "About",
         link: "/about",
     },
     {
-        title: "Product Menu",
+        title: "Menu",
         link: "/products",
     },
     {
-        title: "Contact Us",
+        title: "Contact",
         link: "/contact",
     },
     {
