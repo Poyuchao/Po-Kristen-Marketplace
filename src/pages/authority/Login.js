@@ -44,10 +44,9 @@ const Login = () => {
                         <span className="font-bold underline cursor-pointer ml-2 px-2 py-1 rounded">Register now!</span>
                     </div>
 
-
-
                     <p className="font-bold text-blue-600 mt-3 cursor-pointer mb-60">Forget password?</p>
                 </div>
+                
             </div>
         </div>
     );

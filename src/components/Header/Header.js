@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import navlinks from "..";  // import navlinks from index page
-
+import logo from '../../image/logo.png'
 
 const Header = () => {
     // initialize open is false
@@ -17,13 +17,13 @@ const Header = () => {
                     <div className="flex items-center">
                         {/* Logo */}
                         <img
-                            src="/The Good Stuff Logo.png"
+                            src={logo}
                             alt="Logo"
-                            className="h-20 w-20"
+                            className="h-20 w-20 rounded-full"
                         />
                         {/* Store name */}
                         <a href="/" className="text-white ml-3 text-2xl">
-                            The Good Stuff
+                            Taiwan Good Stuff
                         </a>
                     </div>
                     {/* Navigation Links */}
