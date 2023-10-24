@@ -1,4 +1,5 @@
 import React from "react";
+import SnacksSection from './SnacksSection';
 
 const Home = () => {
     return (
@@ -26,13 +27,19 @@ const Home = () => {
             </div>
             
             {/* Product Menu */}
-            <div className="p-4 bg-white">
-                <h1 className="text-xl font-semibold">Products Menu</h1>
+            <div>
+                <SnacksSection />
             </div>
+
+
+
+  
+            
+
             
         </div>
     );
-}
+};
 
 export default Home;
 
