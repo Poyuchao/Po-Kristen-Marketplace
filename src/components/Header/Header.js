@@ -34,7 +34,7 @@ const Header = () => {
         </div>
         {/* Nav Bar */}
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-32">
+                <div className="flex items-center justify-between h-32 ">
                     <div className="flex items-center">
                         {/* Logo */}
                         <img
@@ -142,6 +142,10 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
 
 
 
