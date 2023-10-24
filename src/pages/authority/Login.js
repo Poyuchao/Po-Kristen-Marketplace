@@ -9,7 +9,7 @@ const Login = () => {
                 <div className="flex-1 px-2.5 bg-gray-400 rounded-l-xl"> {/* Set to flex-grow-3 for left side */}
                 <div className="p-5">
                 <h1 className="font-bold text-4xl sm:text-2xl text-black text-shadow mt-12 text-center">Sign in your account</h1>
-                <img src={logo} alt="Taiwan Good Stuff Logo" className="w-full rounded-md shadow-lg mt-8" />
+                <img src={logo} alt="Taiwan Good Stuff Logo" className="w-full rounded-full shadow-lg mt-8" />
                
             </div>
 
@@ -46,7 +46,7 @@ const Login = () => {
 
                     <p className="font-bold text-blue-600 mt-3 cursor-pointer mb-60">Forget password?</p>
                 </div>
-                
+
             </div>
         </div>
     );
