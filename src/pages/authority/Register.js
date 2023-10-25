@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
 import logo from '../../image/logo.png';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // import axios for making HTTP requests
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    // States for registration
+    const [username, setName] =useState('');
+    const [email, setEmail]=useState('');
+    const [password,setPassword]=useState('');
     const [gender, setGender] = useState(''); // Default as empty string
+    // link to login
+    const navigate=useNavigate()
+   
+    
 
-    const handleSubmit = () => {
-        // Here you can handle the form submission, e.g. sending the data to a server
-        console.log({
-            gender,
-            // ... other form data
-        });
-    };
+     // Handling name email and password changes
+     const handleName =(e) => setName(e.target.value);
+     const handleEmailChange = (e) => setEmail(e.target.value);
+     const handlePasswordChange = (e) => setPassword(e.target.value);
+     const handleGender=(e) => setGender(e.target.value);
+
+     const handleSubmit =(e) =>{
+        e.preventDefault()
+        axios.post('http://localhost:3001/register',{username,email,password,gender})
+        .then(result=>{console.log(result)
+        navigate('/login')})
+        .catch(err=> console.log(err))
+     }
+    
 
     return (
         <div className="bg-white flex justify-center w-full pt-5">
@@ -25,31 +42,38 @@ const Register = () => {
                             <input 
                                 type="text" 
                                 id="username"
+                                value={username} // <- bind state
+                                onChange={handleName} // <- handle change
                                 placeholder="Enter your username"
-                                autoComplete="username"
+                                autoComplete="username" //show autofill suggestions for an input field.
                                 className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
                             />
                         </label>
 
                         <label htmlFor="Email" className="font-roboto text-gray-500 mt-5 font-semibold block">
                             Email
-                            <input 
-                                type="email" 
-                                id="Email"
-                                placeholder="Enter your Email"
-                                autoComplete="email"
-                                className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
-                            />
+                                {/**Bind the new handler functions to the respective input fields: */}
+                                <input 
+                                    type="email" 
+                                    id="Email"
+                                    value={email} // bind email to state
+                                    onChange={handleEmailChange} // handle change
+                                    placeholder="Enter your Email"
+                                    autoComplete="email"
+                                    className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
+                                />
                         </label>
 
                         <label htmlFor="password" className="font-roboto text-gray-500 mt-5 font-semibold block">
                             Password
-                            <input 
-                                type="password" 
-                                id="password"
-                                placeholder="Enter your password"
-                                className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
-                            />
+                                <input 
+                                    type="password" 
+                                    id="password"
+                                    value={password} // bind password to state
+                                    onChange={handlePasswordChange} // handle change
+                                    placeholder="Enter your password"
+                                    className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
+                                />
                         </label>
 
                         {/*Gender*/}
@@ -61,7 +85,7 @@ const Register = () => {
                                     name="gender" 
                                     value="male" 
                                     checked={gender === 'male'}
-                                    onChange={(e) => setGender(e.target.value)} 
+                                    onChange={handleGender} 
                                     className="mr-2"
                                 />
                                 <label htmlFor="male" className="font-roboto text-gray-500 mr-4">Male</label>
@@ -72,7 +96,7 @@ const Register = () => {
                                     name="gender" 
                                     value="female" 
                                     checked={gender === 'female'}
-                                    onChange={(e) => setGender(e.target.value)} 
+                                    onChange={handleGender} 
                                     className="mr-2"
                                 />
                                 <label htmlFor="female" className="font-roboto text-gray-500">Female</label>
