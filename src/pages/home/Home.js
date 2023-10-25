@@ -20,9 +20,11 @@ const Home = () => {
                         Join us on a journey through taste and unforgettable moments.
                     </p>
 
-                    <button className="px-8 py-4 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition duration-300 ease-in-out">
-                        Go Snacking!
+                    <button className=" px-8 py-4 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition duration-300 ease-in-out">
+                            Go Snacking!
                     </button>
+                    {/* Add space  */}
+                    <div className="mb-4"></div>
                 </div>
             </div>
             
