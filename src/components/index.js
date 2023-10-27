@@ -1,3 +1,5 @@
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 export {default as Header} from "./Header/Header";
 export {default as Footer} from "./Footer/Footer";
 
@@ -14,7 +16,7 @@ const navlinks = [
     },
     {
         title: "Product Menu",
-        link: "/products",
+        link: "/productMenu",
     },
     // {
     //    title: "Register",
@@ -25,7 +27,7 @@ const navlinks = [
         link: "/login",
     },
     {
-        title: "Cart",
+        icon: faShoppingCart,  // specify the cart icon here
         link: "/Cart",
     },
 ];

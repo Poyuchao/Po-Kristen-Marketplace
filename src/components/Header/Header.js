@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import navlinks from "..";  // import navlinks from index page
 import logo from '../../image/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,8 +11,29 @@ const Header = () => {
     const toggleMenu = () => {
         setOpen(!open);
     };
+    
+    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
+    console.log(userData.username)
+    // Effect to listen for changes in localStorage
+    useEffect(() => {
+        // Function to handle the storage event
+        const handleStorageChange = () => {
+            setUserData(JSON.parse(localStorage.getItem('loggedInUser')));
+        };
 
+        // Attach the event listener
+        window.addEventListener('storage', handleStorageChange);
+
+        // Cleanup the event listener on unmount
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []); // The empty dependency array ensures this effect runs only once, similar to componentDidMount.
+
+    
     return (
+       
+      
         <div className="bg-#FAFAFA relative"> {/* Added relative for positioning context */}
         <div className="bg-[#474747] flex justify-end items-center p-2 md:p-4 lg:p-6">
             {/* Twitter Icon */}
@@ -43,9 +64,11 @@ const Header = () => {
                             className="h-20 w-20 rounded-full"
                         />
                         {/* Store name */}
-                        <a href="/" className="text-black ml-3 text-2xl">
+                        <a href="/" className="text-black ml-3 text-2xl font-medium">
                             Taiwan Good Stuff
+                            
                         </a>
+
                     </div>
                     {/* Navigation Links */}
                     <div className="hidden md:block flex-grow">
@@ -57,20 +80,29 @@ const Header = () => {
                                     {navlinks.slice(0, -1).map((link, index) => (
                                         <a
                                             key={index}
-                                            className="text-black transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-md font-medium"
+                                            className="text-black transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium"
                                             href={link.link}
                                         >
                                             {link.title}
                                         </a>
                                     ))}
                                 </div>
-
-                                {/* Cart link (Assuming it's the last link in your navlinks array) */}
+                               
+                                {userData ? (
+                                            <span className="text-black text-xl font-medium">
+                                                Hi ! {userData.username}
+                                            </span>
+                                        ) : null}
+                              {/* Cart link (Assuming it's the last link in your navlinks array) */}
                                 <a
-                                    className="text-black transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-md font-medium"
+                                    className="text-gray-800 transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-2xl font-medium"
                                     href={navlinks[navlinks.length - 1].link}
                                 >
-                                    {navlinks[navlinks.length - 1].title}
+                                    {navlinks[navlinks.length - 1].icon ? (
+                                        <FontAwesomeIcon icon={navlinks[navlinks.length - 1].icon} />
+                                    ) : (
+                                        navlinks[navlinks.length - 1].title
+                                    )}
                                 </a>
                                 
                             </div>

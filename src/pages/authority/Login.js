@@ -9,7 +9,7 @@ const Login = () => {
    // States for registration
    const [username, setName] =useState('');
    const [password,setPassword]=useState('');
-
+   const [userInfo, setUserInfo] = useState({});
    // link to login
    const navigate=useNavigate()
    // Handling name email and password changes
@@ -26,9 +26,18 @@ const Login = () => {
     axios.post('http://localhost:3001/login',{username,password})
     //  The result is the response object returned by the server after the axios.post()
     .then(result =>{console.log(result)
-        if (result.data ==="Success") {
-            // navigate to home 
-            navigate('/')
+        if (result.data === "Success") {
+          
+            const userData = { username: username };
+
+            setUserInfo(userData);
+            console.log(userData);
+            console.log(userInfo);
+            // Store user data in localStorage
+            localStorage.setItem('loggedInUser', JSON.stringify(userData));
+
+         
+            navigate('/');
         }
     })
     .catch(err=> console.log(err))

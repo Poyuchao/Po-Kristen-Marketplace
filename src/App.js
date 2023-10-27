@@ -1,7 +1,8 @@
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 //Pages
-import {Home,Contact,Login,Register,Reset} from "./pages"
+import {Home,Contact,Login,Register,Reset,Menu} from "./pages"
+
 //components
 import { Header,Footer } from './components';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login/>}></Route>
+        <Route path="/productMenu" element={<Menu/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/reset" element={<Reset/>}></Route>
       </Routes>
