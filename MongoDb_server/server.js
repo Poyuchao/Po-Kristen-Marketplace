@@ -19,10 +19,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
 
 
   app.post("/login",(req,res)=>{
+    // first extracts the username and password from the request body.
      const{username, password} = req.body;
+     // checks the database (using a findOne query) to see if a user with the provided username exists.
      CustomerModel.findOne({username: username})
      .then(user=> {
       if (user){
+        // If such a user is found and the password matches the one stored in the database,
+        // it sends back a JSON response of "Success".
         if (user.password === password){
           res.json("Success")
         } else {
@@ -33,6 +37,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
   })
 
   app.post('/register', (req, res) => {
+    //  This is a Mongoose model method that creates and saves a new document to the database. 
     CustomerModel.create(req.body)
     .then(customers=> res.json(customers))
     .catch(err=> res.json(err))

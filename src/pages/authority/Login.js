@@ -17,10 +17,17 @@ const Login = () => {
    const handlePasswordChange = (e) => setPassword(e.target.value);
    
    const handleLogin =(e) => {
+    // stops the form from doing its default action
     e.preventDefault()
+    // It uses axios to make a POST request to http://localhost:3001/login with the username and password as data.
+    //  The POST method is used to submit data to be processed to a specified resource. For instance,
+    //  when you fill out a form on a web page and click the submit button, behind the scenes, 
+    // your web browser might be using a POST request to send that data to a server.
     axios.post('http://localhost:3001/login',{username,password})
+    //  The result is the response object returned by the server after the axios.post()
     .then(result =>{console.log(result)
         if (result.data ==="Success") {
+            // navigate to home 
             navigate('/')
         }
     })
