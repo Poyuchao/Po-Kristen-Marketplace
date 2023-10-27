@@ -1,9 +1,11 @@
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 //Pages
-import {Home,Contact,Login,Register,Reset} from "./pages"
+import {Home,Contact,Login,Register,Reset,ProductContext,Cart} from "./pages"
 //components
 import { Header,Footer } from './components';
+
+
 
 
 function App() {
@@ -18,9 +20,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/products" element={<ProductContext />} />
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/reset" element={<Reset/>}></Route>
+        <Route path="/cart" element={<Cart/>}></Route>
       </Routes>
 
     </div>
