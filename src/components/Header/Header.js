@@ -1,35 +1,20 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import navlinks from "..";  // import navlinks from index page
 import logo from '../../image/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter,faInstagram, faFacebookF, faGithub  } from '@fortawesome/free-brands-svg-icons';
+import { useUser } from "../../pages/authority/UserContext";
 
 const Header = () => {
-    // initialize open is false
-    const [open, setOpen] = useState(false);
-    // setopen to its opposite side
-    const toggleMenu = () => {
-        setOpen(!open);
-    };
-    
-    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
-    console.log(userData.username)
-    // Effect to listen for changes in localStorage
-    useEffect(() => {
-        // Function to handle the storage event
-        const handleStorageChange = () => {
-            setUserData(JSON.parse(localStorage.getItem('loggedInUser')));
-        };
-
-        // Attach the event listener
-        window.addEventListener('storage', handleStorageChange);
-
-        // Cleanup the event listener on unmount
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, []); // The empty dependency array ensures this effect runs only once, similar to componentDidMount.
-
+     // Initialize open as false
+     const [open, setOpen] = useState(false);
+     // Use the useUser hook to access user data
+     const { userData } = useUser(); 
+ 
+     // Toggle the mobile menu
+     const toggleMenu = () => {
+         setOpen(!open);
+     };
     
     return (
        
@@ -88,11 +73,16 @@ const Header = () => {
                                     ))}
                                 </div>
                                
-                                {userData ? (
-                                            <span className="text-black text-xl font-medium">
-                                                Hi ! {userData.username}
-                                            </span>
-                                        ) : null}
+                                  {/* Display user data if available */}
+                                    {userData ? (
+                                        <span className="text-black text-xl font-medium">
+                                            Hi, {userData.username}!
+                                        </span>
+                                    ) : (
+                                        <span className="text-black text-xl font-medium">
+                                            Welcome, Guest!
+                                        </span>
+                                    )}
                               {/* Cart link (Assuming it's the last link in your navlinks array) */}
                                 <a
                                     className="text-gray-800 transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-2xl font-medium"

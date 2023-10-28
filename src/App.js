@@ -1,38 +1,32 @@
+import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-//Pages
-import {Home,Contact,Login,Register,Reset,Menu} from "./pages"
-
-//components
-import { Header,Footer } from './components';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home, Contact, Login, Register, Reset, Menu } from './pages';
+import { Header, Footer } from './components';
+import { UserProvider } from './pages/authority/UserContext'; // Adjust the path as needed
 
 function App() {
   return (
-    // sticky the footer at the bottom of web
-    <div className='flex flex-col min-h-screen'>
-          <BrowserRouter>
-          <Header/>
-    
-    <div className='flex-grow'>
-      {/* the main content is wrapped inside a div with the flex-grow class. This ensures it takes up all available space, pushing the footer down. */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/productMenu" element={<Menu/>}></Route>
-        <Route path="/register" element={<Register/>}></Route>
-        <Route path="/reset" element={<Reset/>}></Route>
-      </Routes>
+    <UserProvider>
+      <div className="flex flex-col min-h-screen">
+        <BrowserRouter>
+          <Header />
 
-    </div>
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/productMenu" element={<Menu />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/reset" element={<Reset />} />
+            </Routes>
+          </div>
 
-    <Footer/>
-    </BrowserRouter>
-
-    </div>
-
-    
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </UserProvider>
   );
 }
 

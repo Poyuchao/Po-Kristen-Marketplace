@@ -3,13 +3,15 @@ import logo from '../../image/logo.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // import axios for making HTTP requests
 import { useNavigate } from 'react-router-dom';
-
+import { useUser } from './UserContext';
 
 const Login = () => {
    // States for registration
    const [username, setName] =useState('');
    const [password,setPassword]=useState('');
-   const [userInfo, setUserInfo] = useState({});
+   // const [userInfo, setUserInfo] = useState({});
+   const { setUserData } = useUser();
+
    // link to login
    const navigate=useNavigate()
    // Handling name email and password changes
@@ -30,14 +32,16 @@ const Login = () => {
           
             const userData = { username: username };
 
-            setUserInfo(userData);
+            // Store user data in the context
+            setUserData(userData)
             console.log(userData);
-            console.log(userInfo);
+            
             // Store user data in localStorage
             localStorage.setItem('loggedInUser', JSON.stringify(userData));
 
          
             navigate('/');
+        
         }
     })
     .catch(err=> console.log(err))
