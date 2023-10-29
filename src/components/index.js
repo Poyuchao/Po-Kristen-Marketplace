@@ -16,7 +16,7 @@ const navlinks = [
     },
     {
         title: "Product Menu",
-        link: "/productMenu",
+        link: "/products",
     },
     // {
     //    title: "Register",
