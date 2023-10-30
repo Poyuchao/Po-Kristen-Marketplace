@@ -3,32 +3,43 @@
 import React, { useState, useEffect } from "react";
 
 const ProductContext = () => {
+  // State for storing product data fetched from the server.
     const [products, setProducts] = useState([]);
+    // State for indicating whether data is being fetched.
     const [loading, setLoading] = useState(true);
+    // State for storing any errors that occur during data fetching.
     const [error, setError] = useState(null);
 
+// Effect hook for fetching product data on the initial render.
     useEffect(() => {
-        // Assuming json-server runs on port 3000
+        // Fetch product data from a local server running on port 3000.
         fetch('http://localhost:3000/products')
             .then(response => {
+              // Check for unsuccessful network responses.
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
                 return response.json();
             })
             .then(data => {
+              // Set the product data and mark the loading as finished.
                 setProducts(data);
                 setLoading(false);
             })
             .catch(err => {
+              // Handle any errors that occurred during fetching.
                 setError(err.message);
                 setLoading(false);
             });
     }, []);
-
+// Display a loading message while fetching data.
     if (loading) return <div>Loading...</div>;
+  // Display any errors that occur during data fetching.
     if (error) return <div>Error: {error}</div>;
 
+ // Render the grid of products.
+//  grid, grid-cols-1, shadow-md, hover:shadow-xl, etc. for layout and effects.
+//font-semibold, py-2, px-4, border, etc. for typography and button styling.
     return (
       
         <div>
