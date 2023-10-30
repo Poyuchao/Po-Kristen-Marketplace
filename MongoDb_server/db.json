@@ -1,0 +1,60 @@
+
+{
+    "products": [
+      {
+        "id": 1,
+        "productName": "Good Luck Corn",
+        "price": 2.5,
+        "productImg": "/ProductImg/Cookies/GoodLuckCorn.webp"
+      },
+      {
+        "id": 2,
+        "productName": "Lonely-God Potato Twist",
+        "price": 3.5,
+        "productImg": "/ProductImg/Cookies/Lonely_God_Potato_Twist.webp"
+      },
+      {
+        "id": 3,
+        "productName": "Peacock Biscuit",
+        "price": 8.5,
+        "productImg": "/ProductImg/Cookies/PeacockBiscuit.avif"
+      },
+      {
+        "id": 4,
+        "productName": "Castella TW",
+        "price": 9.0,
+        "productImg": "/ProductImg/Pastries/CastellaTW.jpeg"
+      },
+      {
+        "id": 5,
+        "productName": "Pineapple Cake",
+        "price": 3.5,
+        "productImg": "/ProductImg/Pastries/Pineapple_Pastry.JPG"
+      },
+      {
+        "id": 6,
+        "productName": "Hi-Chew",
+        "price": 1.5,
+        "productImg": "/ProductImg/Sweets/HiChew.jpg"
+      },
+      {
+        "id": 7,
+        "productName": "Milk Candy",
+        "price": 1.5,
+        "productImg": "/ProductImg/Sweets/MilkCandy.jpg"
+      },
+      {
+        "id": 8,
+        "productName": "Apple Soda",
+        "price": 2.5,
+        "productImg": "/ProductImg/Drinks/AppleSoda.webp"
+      },
+      {
+        "id": 9,
+        "productName": "Hey-Song",
+        "price": 2.5,
+        "productImg": "/ProductImg/Drinks/HeySong.jpg"
+      }
+    ]
+  }
+  

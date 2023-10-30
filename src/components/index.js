@@ -28,7 +28,7 @@ const navlinks = [
     },
     {
         icon: faShoppingCart,  // specify the cart icon here
-        link: "/Cart",
+        link: "/cart",
     },
 ];
 
