@@ -630,11 +630,6 @@ video {
   position: relative;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-}
-
 .left-0 {
   left: 0px;
 }
