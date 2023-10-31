@@ -1,33 +1,114 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import logo from '../../image/logo.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // import axios for making HTTP requests
 import { useNavigate } from 'react-router-dom';
+// Import validation functions
+import {
+    validateUsername,validatePassword,validateEmail,validateGender
+  } 
+  from './Validation'; 
 
 const Register = () => {
     // States for registration
+    // username , username validation
     const [username, setName] =useState('');
+    const [usernameError, setUsernameError] = useState('');
+
+    // email, email validation 
     const [email, setEmail]=useState('');
+    const [emailError, setEmailError] = useState('');
+
+    // password, password validation
     const [password,setPassword]=useState('');
+    const [passwordError, setPasswordError] = useState('')
+
     const [gender, setGender] = useState(''); // Default as empty string
+
     // link to login
     const navigate=useNavigate()
    
-    
+    useEffect(() => {
+        // Check initial validation for email
+        const emailValidationResult = validateEmail(email);
+        if (emailValidationResult) {
+          setEmailError(emailValidationResult);
+        }
+      
+        // Check initial validation for username
+        const userNameValidationResult = validateUsername(username);
+        if (userNameValidationResult) {
+          setUsernameError(userNameValidationResult);
+        }
 
+         // Check initial validation for password
+        const passwordValidationResult = validatePassword(password);
+        if (passwordValidationResult) {
+            setPasswordError(passwordValidationResult);
+  }
+
+
+      }, [email, username,password]);
+      
      // Handling name email and password changes
-     const handleName =(e) => setName(e.target.value);
-     const handleEmailChange = (e) => setEmail(e.target.value);
-     const handlePasswordChange = (e) => setPassword(e.target.value);
+     const handleName = (e) => {
+        const usernameValue = e.target.value;
+        setName(usernameValue);
+        // Use the validateUsername function to check for username validity
+        const usernameValidationResult = validateUsername(usernameValue);
+
+        if (usernameValidationResult) {
+          setUsernameError(usernameValidationResult);
+        } else {
+          setUsernameError(''); // Clear the error message when the username is valid
+        }
+      };
+
+      const handleEmailChange = (e) => {
+        const emailValue = e.target.value;
+        setEmail(emailValue);
+        const emailValidationResult = validateEmail(emailValue);
+    
+        if (emailValidationResult) {
+          setEmailError(emailValidationResult);
+        } else {
+          setEmailError('');
+        }
+      };
+
+     const handlePasswordChange = (e) => {
+        const passwordValue = e.target.value;
+        setPassword(passwordValue);
+        const passwordValidationResult = validatePassword(passwordValue);
+    
+        if (passwordValidationResult) {
+          setPasswordError(passwordValidationResult);
+        } else {
+          setPasswordError('');
+        }
+     }
+
      const handleGender=(e) => setGender(e.target.value);
 
-     const handleSubmit =(e) =>{
-        e.preventDefault()
-        axios.post('http://localhost:3001/register',{username,email,password,gender})
-        .then(result=>{console.log(result)
-        navigate('/login')})
-        .catch(err=> console.log(err))
-     }
+     const handleSubmit = (e) => {
+        e.preventDefault();
+      
+        // Check if there are any error messages
+        if (usernameError || emailError || passwordError) {
+          // There are errors, do not proceed with submission
+          console.log('Form has errors. Please fix them.');
+          return;
+        }
+      
+        // If there are no errors, proceed with form submission
+        axios
+          .post('http://localhost:3001/register', { username, email, password, gender })
+          .then((result) => {
+            console.log(result);
+            navigate('/login');
+          })
+          .catch((err) => console.log(err));
+      };
     
 
     return (
@@ -48,20 +129,24 @@ const Register = () => {
                                 autoComplete="username" //show autofill suggestions for an input field.
                                 className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
                             />
+                            {/* This part checks if the usernameError variable has a truthy value.
+                             In JavaScript, an empty string ('') is considered falsy**/}
+                             {usernameError && <p className="text-red-500">{usernameError}</p>} {/* Display error if usernameError is not empty */}
                         </label>
 
+                        {/* Email */}
                         <label htmlFor="Email" className="font-roboto text-gray-500 mt-5 font-semibold block">
-                            Email
-                                {/**Bind the new handler functions to the respective input fields: */}
-                                <input 
-                                    type="email" 
-                                    id="Email"
-                                    value={email} // bind email to state
-                                    onChange={handleEmailChange} // handle change
-                                    placeholder="Enter your Email"
-                                    autoComplete="email"
-                                    className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
+                                Email
+                            <input
+                                type="email"
+                                id="Email"
+                                value={email}
+                                onChange={handleEmailChange}
+                                placeholder="Enter your Email"
+                                autoComplete="email"
+                                className="mt-1 w-full p-2 border rounded focus:border-blue-500"
                                 />
+                                {emailError && <p className="text-red-500">{emailError}</p>} {/* Display error if emailError is not empty */}
                         </label>
 
                         <label htmlFor="password" className="font-roboto text-gray-500 mt-5 font-semibold block">
@@ -74,6 +159,7 @@ const Register = () => {
                                     placeholder="Enter your password"
                                     className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
                                 />
+                                 {passwordError && <p className="text-red-500">{passwordError}</p>} {/* Display error if emailError is not empty */}
                         </label>
 
                         {/*Gender*/}
