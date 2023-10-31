@@ -16,7 +16,7 @@ const navlinks = [
     },
     {
         title: "Product Menu",
-        link: "/productMenu",
+        link: "/products",
     },
     // {
     //    title: "Register",
@@ -28,7 +28,7 @@ const navlinks = [
     },
     {
         icon: faShoppingCart,  // specify the cart icon here
-        link: "/Cart",
+        link: "/cart",
     },
 ];
 
