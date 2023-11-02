@@ -1,8 +1,11 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useCart } from "../cart/CartContext"; // import use cart
 
-const ProductContext = () => {
+const ProductPage = () => {
+
+    const {addToCart} = useCart();
   // State for storing product data fetched from the server.
     const [products, setProducts] = useState([]);
     // State for indicating whether data is being fetched.
@@ -53,7 +56,8 @@ const ProductContext = () => {
                                 <p className="font-semibold mb-1">{product.productName}</p>
                                 <p className="font-semibold mb-3">${product.price}</p>
                               
-                                <button className="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-300 hover:border-transparent rounded">
+                                <button className="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-300 hover:border-transparent rounded"
+                                 onClick={() =>{console.log("Adding to cart: ", product);addToCart(product)} }>
                                     Add To Cart
                                 </button>
                              
@@ -66,4 +70,4 @@ const ProductContext = () => {
     );
 };
 
-export default ProductContext;
+export default ProductPage;

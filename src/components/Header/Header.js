@@ -4,6 +4,7 @@ import logo from '../../image/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter,faInstagram, faFacebookF, faGithub  } from '@fortawesome/free-brands-svg-icons';
 import { useUser } from "../../pages/authority/UserContext";
+import CartWidget from "../CartWidget/CartWidget";
 
 const Header = () => {
      // Initialize open as false
@@ -83,18 +84,13 @@ const Header = () => {
                                             Welcome, Guest!
                                         </span>
                                     )}
-                              {/* Cart link (Assuming it's the last link in your navlinks array) */}
-                                <a
-                                    className="text-gray-800 transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-2xl font-medium"
-                                    href={navlinks[navlinks.length - 1].link}
-                                >
-                                    {navlinks[navlinks.length - 1].icon ? (
-                                        <FontAwesomeIcon icon={navlinks[navlinks.length - 1].icon} />
-                                    ) : (
-                                        navlinks[navlinks.length - 1].title
-                                    )}
-                                </a>
-                                
+                           {/* Cart link */}
+                                    <CartWidget 
+                                        link={navlinks[navlinks.length - 1].link}
+                                        icon={navlinks[navlinks.length - 1].icon}
+                                        title={navlinks[navlinks.length - 1].title}
+                                    />
+                                                            
                             </div>
                         
                     </div>
