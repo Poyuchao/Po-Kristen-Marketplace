@@ -7,18 +7,20 @@ const Footer = () => {
         <footer className="bg-[#474747] text-white py-8">
             <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
 
+               
                 {/* Logo */}
-                <div className="flex justify-center md:justify-start items-center">
+                 {/*adding mx-auto to each container, ensure that they are centered horizontally and have equal spacing on both the left and right sides */}
+                <div className="flex justify-center md:justify-start items-center mx-auto">
                     <img src="logo192.png" alt="Logo" className="mb-4 w-32 md:w-40 h-32 md:h-40 object-cover rounded-full" />
                 </div>
 
                 {/* Description */}
-                <div>
+                <div className="md:pl-4 mx-auto"> {/* Added mx-auto and padding-left */}
                     <p className="text-sm md:text-base text-center md:text-left">Welcome to Taiwan Good Stuff, your passport to the delectable world of Taiwanese flavors. Explore our diverse array of savory and sweet treats and mouthwatering pastries. Discover the taste of Taiwan, one tasty bite at a time.</p>
                 </div>
-                
+
                 {/* Product categories */}
-                <div className="text-center md:text-left">
+                <div className="text-center md:text-left mx-auto"> {/* Added mx-auto */}
                     <div className="text-lg font-bold mb-2">Product</div>
                     <div className="space-y-2">
                         <div>Cookies</div>
