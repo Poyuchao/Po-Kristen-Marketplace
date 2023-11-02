@@ -37,7 +37,7 @@ export const CartProvider = ({children}) => {
             }else{
 
                 // if Product is not in the cart, add it with a quantity of 1
-                const updatedCart = [...prevCart , product];
+                const updatedCart = [...prevCart, { ...product, quantity: 1 }];
                 localStorage.setItem("cart", JSON.stringify(updatedCart));
                 return updatedCart;
 
