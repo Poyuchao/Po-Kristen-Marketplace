@@ -50,9 +50,9 @@ const ProductPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10 p-5">
                 {products.map((product) => {
                     return (
-                        <div key={product.id} className="bg-white shadow-md p-3 rounded-md transition hover:shadow-xl max-w-xs mx-auto flex flex-col">
+                        <div key={product.id} className="max-w-xs md:max-w-sm w-full rounded overflow-hidden shadow-lg m-4">
                             <div >
-                                <img className=" w-40 h-40" src={`http://localhost:3000${product.productImg}`} alt={product.productName} />
+                                <img className=" w-full h-48 object-cover" src={`http://localhost:3000${product.productImg}`} alt={product.productName} />
                                 <p className="font-semibold mb-1">{product.productName}</p>
                                 <p className="font-semibold mb-3">${product.price}</p>
                               
