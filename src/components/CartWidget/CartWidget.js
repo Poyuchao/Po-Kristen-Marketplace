@@ -1,22 +1,35 @@
 // cart component
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useCart } from "../../pages/cart/CartContext";
+import { BsFillCartFill } from 'react-icons/bs';
 
 
-const CartWidget = ({link,icon,title}) => (
+const CartWidget = ({link,title}) => {
 
+    const {cart} = useCart();
+
+    //count total items in the cart
+    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+    return (
 
     <a
-    className="text-gray-800 transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-2xl font-medium"
+    className="text-gray-800 transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-2xl font-medium relative flex items-center"
     href={link}
         >
-    {icon ? (
-        <FontAwesomeIcon icon={icon} />
-    ) : (
-        title
-    )}
-</a>
+    <BsFillCartFill />
+        
+        {itemCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                {itemCount}
+            </span>
+        )}
+        <span className="ml-2">{title}</span>
+        
 
-);
+    </a>
+    );
+
+    };
 
 export default CartWidget;
