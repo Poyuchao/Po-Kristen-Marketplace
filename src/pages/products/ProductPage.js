@@ -12,6 +12,8 @@ const ProductPage = () => {
     const [loading, setLoading] = useState(true);
     // State for storing any errors that occur during data fetching.
     const [error, setError] = useState(null);
+    //state for track the current filter
+    const [filter, setFilter] = useState("all");
 
 // Effect hook for fetching product data on the initial render.
     useEffect(() => {
@@ -40,15 +42,35 @@ const ProductPage = () => {
   // Display any errors that occur during data fetching.
     if (error) return <div>Error: {error}</div>;
 
+
+    // handle the filter change
+    const handleFilterChange = (newFilter) => {
+        setFilter(newFilter);
+      };
+    const filteredProducts = filter === "all" ? products : products.filter(product => product.category === filter);
+
  // Render the grid of products.
 //  grid, grid-cols-1, shadow-md, hover:shadow-xl, etc. for layout and effects.
 //font-semibold, py-2, px-4, border, etc. for typography and button styling.
     return (
       
         <div>
-          
+            {/* add filter button */}
+            <div className="my-4">
+                <button button onClick={()=> handleFilterChange("all")} className={`py-2 px-4  ${filter === 'all' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>ALL</button>
+                <button button onClick={()=> handleFilterChange("Cookies")} className={`py-2 px-4 ${filter === 'Cookies' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Cookies</button>
+                <button button onClick={()=> handleFilterChange("Sweets")} className={`py-2 px-4 ${filter === 'Sweets' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Sweets</button>
+                <button button onClick={()=> handleFilterChange("Pastries")} className={`py-2 px-4 ${filter === 'Pastries' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Pastries</button>
+                <button button onClick={()=> handleFilterChange("Drinks")} className={`py-2 px-4 ${filter === 'Drinks' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Drinks</button>
+                
+
+            </div>
+
+
+
+          {/* products */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10 p-5">
-                {products.map((product) => {
+                {filteredProducts.map((product) => {
                     return (
                         <div key={product.id} className="max-w-xs md:max-w-sm w-full rounded overflow-hidden shadow-lg m-4">
                             <div >
