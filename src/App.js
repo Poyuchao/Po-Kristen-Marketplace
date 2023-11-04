@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Form, Route, Routes } from 'react-router-dom';
-import { Home, Contact, Login, Register, Reset,ProductContext} from './pages';
+import { Home, Contact, Login, Register, Reset,ProductPage, Cart} from './pages';
 import { Header, Footer } from './components';
 import { UserProvider } from './pages/authority/UserContext'; // Adjust the path as needed
+import { CartProvider } from './pages/cart/CartContext';
+
 
 
 function App() {
@@ -11,7 +13,10 @@ function App() {
 
 
   return (
+    
     <UserProvider>
+      <CartProvider>
+     
       <div className="flex flex-col min-h-screen">
         <BrowserRouter>
           <Header />
@@ -21,11 +26,15 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/contact" element={<Contact />} />
 
-              <Route path="/products" element={<ProductContext/>} />
+              <Route path="/products" element={<ProductPage/>} />
 
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/reset" element={<Reset />} />
+
+              <Route path="/cart" element={<Cart />} />
+
+              
               
 
 
@@ -36,11 +45,15 @@ function App() {
 
 
           </div>
+          
 
           <Footer />
         </BrowserRouter>
       </div>
+      </CartProvider>
     </UserProvider>
+    
+    
   );
 }
 
