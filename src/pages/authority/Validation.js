@@ -22,9 +22,10 @@ export function validateEmail(email) {
     if (password.trim() === '') {
         return "Please input valid password!";
       }
-      // Return null if the username is valid
+      // Return null if the username is  valid
       return null; 
   }
 
+  
 
   
