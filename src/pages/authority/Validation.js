@@ -1,16 +1,15 @@
+// import axios from 'axios';  import axios for making HTTP requests
 
 
-// Function to validate the username
 export function validateUsername(username) {
     if (username.trim() === '') {
-      return "Please input valid username!";
+        return "Please input a valid username!";
     }
-    // Return null if the username is valid
-    return null; 
-  }
+    return null;
+}
 
 
-  export function validateEmail(email) {
+export function validateEmail(email) {
     if (email.trim() === '') {
         return "Please input valid email!";
       }
@@ -27,10 +26,5 @@ export function validateUsername(username) {
       return null; 
   }
 
-  export function validateGender(gender) {
-    if (gender.trim() === '') {
-        return "please choose your gender!";
-      }
-      // Return null if the username is valid
-      return null; 
-  }
+
+  

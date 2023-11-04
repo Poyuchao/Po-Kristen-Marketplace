@@ -7,8 +7,17 @@ import { useUser } from './UserContext';
 
 const Login = () => {
    // States for registration
+   // username
    const [username, setName] =useState('');
+   const [usernameErrorMessage,setUsernameErrorMessage]=useState('');
+
+   // password 
    const [password,setPassword]=useState('');
+   const [passwordErrorMessage,setpassWordErrorMessage]=useState('');
+
+   //Others error
+   const [errorMessage,setErrorMessage]=useState('');
+
    // const [userInfo, setUserInfo] = useState({});
    const { setUserData } = useUser();
 
@@ -17,35 +26,49 @@ const Login = () => {
    // Handling name email and password changes
    const handleName =(e) => setName(e.target.value);
    const handlePasswordChange = (e) => setPassword(e.target.value);
-   
-   const handleLogin =(e) => {
-    // stops the form from doing its default action
-    e.preventDefault()
-    // It uses axios to make a POST request to http://localhost:3001/login with the username and password as data.
-    //  The POST method is used to submit data to be processed to a specified resource. For instance,
-    //  when you fill out a form on a web page and click the submit button, behind the scenes, 
-    // your web browser might be using a POST request to send that data to a server.
-    axios.post('http://localhost:3001/login',{username,password})
-    //  The result is the response object returned by the server after the axios.post()
-    .then(result =>{console.log(result)
-        if (result.data === "Success") {
-          
-            const userData = { username: username };
-
-            // Store user data in the context
-            setUserData(userData)
-            console.log(userData);
-            
-            // Store user data in localStorage
-            localStorage.setItem('loggedInUser', JSON.stringify(userData));
-
-         
-            navigate('/');
-        
+   const handleLogin = (e) => {
+    e.preventDefault();
+  
+    // Reset any existing error messages
+    setUsernameErrorMessage('');
+    setpassWordErrorMessage('');
+    setErrorMessage('');
+  
+    // Send a POST request to the login endpoint
+    axios.post('http://localhost:3001/login', { username, password })
+      .then((response) => {
+        // Check for successful login response
+        if (response.status === 200 && response.data.message === "Success") {
+          console.log('Login successful');
+  
+          const userData = { username: username };
+          setUserData(userData);
+          localStorage.setItem('loggedInUser', JSON.stringify(userData));
+          navigate('/'); // Redirect to home or dashboard
         }
-    })
-    .catch(err=> console.log(err))
-}
+      })
+      .catch((err) => {
+        if (err.response) {
+          // Match the response from the server code and set the appropriate error message
+          if (err.response.status === 401) {
+            if (err.response.data.message === "User not found") {
+              setUsernameErrorMessage('User not found. Please try again.');
+            } else if (err.response.data.message === "The password is incorrect") {
+              setpassWordErrorMessage('The password is incorrect. Please try again.');
+            }
+          } else if (err.response.status === 500) {
+            setErrorMessage('An error occurred. Please try again later.');
+          } else {
+            // Handle other statuses
+            setErrorMessage('Login failed. Please try again later.');
+          }
+        } else {
+          // For non-response errors (like network issues)
+          setErrorMessage('Unable to connect. Please check your internet connection and try again.');
+          console.error('Login error:', err.message);
+        }
+      });
+  };
 
     return (
         <div className="bg-white flex justify-center w-full pt-5 ">
@@ -75,6 +98,7 @@ const Login = () => {
                                 autoComplete="username" //show autofill suggestions for an input field.
                                 className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
                             />
+                         { usernameErrorMessage&& <p className="text-red-500">{usernameErrorMessage}</p>} 
                     </label>
 
                     <label className="font-roboto text-gray-500 block mt-5 font-semibold ">
@@ -87,6 +111,7 @@ const Login = () => {
                                     placeholder="Enter your password"
                                     className="mt-1 w-full p-2 border rounded focus:border-blue-500" 
                                 />
+                        { passwordErrorMessage&& <p className="text-red-500">{passwordErrorMessage}</p>} 
                     </label>
 
                     <button onClick={handleLogin} className="bg-gray-200 mt-5 py-2 px-5 rounded-full shadow font-roboto text-black font-semibold">

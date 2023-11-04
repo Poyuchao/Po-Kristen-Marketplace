@@ -10,7 +10,7 @@ const Header = () => {
      // Initialize open as false
      const [open, setOpen] = useState(false);
      // Use the useUser hook to access user data
-     const { userData } = useUser(); 
+     const { userData,logout} = useUser(); 
  
      // Toggle the mobile menu
      const toggleMenu = () => {
@@ -79,6 +79,7 @@ const Header = () => {
                                         <span className="text-black text-xl font-medium">
                                             Hi, {userData.username}!
                                         </span>
+                                        
                                     ) : (
                                         <span className="text-black text-xl font-medium">
                                             Welcome, Guest!
