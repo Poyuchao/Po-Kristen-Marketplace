@@ -90,6 +90,18 @@ export const CartProvider = ({children}) => {
 
     };
 
+    // remove function
+    const removeFromCart = (productName)=> {
+        setCart((prevCart)=>{
+            // Filter out the item with the matching product name
+            const newCart = prevCart.filter(item => item.productName !== productName);
+            // Update the cart in local storage
+            localStorage.setItem("cart", JSON.stringify(newCart));
+            return newCart;
+        })
+        
+    }
+
 
     // reset the cart
 
@@ -100,7 +112,7 @@ export const CartProvider = ({children}) => {
 
 
     return(
-            <CartContext.Provider value={{cart, addToCart,increaseQuantity,decreaseQuantity,resetCart}}>
+            <CartContext.Provider value={{cart, addToCart,increaseQuantity,decreaseQuantity,resetCart,removeFromCart }}>
                 {children}
             </CartContext.Provider>
         );
