@@ -17,7 +17,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
     console.error('Could not connect to MongoDB', error);
   });
 
-
   app.post("/login",(req,res)=>{
     // first extracts the username and password from the request body.
      const{username, password} = req.body;
@@ -35,13 +34,32 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
       }
      })
   })
-
-  app.post('/register', (req, res) => {
-    //  This is a Mongoose model method that creates and saves a new document to the database. 
-    CustomerModel.create(req.body)
-    .then(customers=> res.json(customers))
-    .catch(err=> res.json(err))
+  app.post('/register', async (req, res) => {
+    const { username } = req.body;
+  
+    try {
+      // Check if the username already exists in the database
+      const existingUser = await CustomerModel.findOne({ username: username });
+  
+      if (existingUser) {
+        // If a user with the username already exists, return a conflict response
+        console.log('Username already exists:', username);
+        res.status(409).json({ message: 'Username already exists' });
+      } else {
+        // No user exists with this username, so create a new user
+        const newUser = await CustomerModel.create(req.body);
+        // New user created successfully, return the user data
+        console.log('User created successfully:', newUser);
+        res.status(201).json(newUser);
+      }
+    } catch (err) {
+      // If there's an error during the operation, return an error response
+      console.error('Error during registration process:', err);
+      res.status(500).json({ message: 'Error during registration process' });
+    }
   });
+
+
 
 const PORT = 3001;
 app.listen(PORT, () => {

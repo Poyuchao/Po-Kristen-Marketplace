@@ -5,7 +5,7 @@ import axios from 'axios'; // import axios for making HTTP requests
 import { useNavigate } from 'react-router-dom';
 // Import validation functions
 import {
-    validateUsername,validatePassword,validateEmail,validateGender
+    validateUsername,validatePassword,validateEmail
   } 
   from './Validation'; 
 
@@ -14,6 +14,7 @@ const Register = () => {
     // username , username validation
     const [username, setName] =useState('');
     const [usernameError, setUsernameError] = useState('');
+    
 
     // email, email validation 
     const [email, setEmail]=useState('');
@@ -24,6 +25,9 @@ const Register = () => {
     const [passwordError, setPasswordError] = useState('')
 
     const [gender, setGender] = useState(''); // Default as empty string
+    // const [genderError, setGenderError] = useState('')
+    // check form complete
+    const [formIncomplete, setFormIncomplete] = useState(false);
 
     // link to login
     const navigate=useNavigate()
@@ -45,8 +49,7 @@ const Register = () => {
         const passwordValidationResult = validatePassword(password);
         if (passwordValidationResult) {
             setPasswordError(passwordValidationResult);
-  }
-
+        }
 
       }, [email, username,password]);
       
@@ -62,6 +65,7 @@ const Register = () => {
         } else {
           setUsernameError(''); // Clear the error message when the username is valid
         }
+       
       };
 
       const handleEmailChange = (e) => {
@@ -88,26 +92,44 @@ const Register = () => {
         }
      }
 
-     const handleGender=(e) => setGender(e.target.value);
-
+     const handleGenderChange = (e) => {
+      setGender(e.target.value);
+    };
+    
      const handleSubmit = (e) => {
         e.preventDefault();
-      
+
+        if (gender===''){
+          setFormIncomplete(true);
+          console.log('Form has errors. Please fix them.');
+          return;
+        }
+
         // Check if there are any error messages
         if (usernameError || emailError || passwordError) {
+          setFormIncomplete(true);
           // There are errors, do not proceed with submission
           console.log('Form has errors. Please fix them.');
           return;
         }
       
-        // If there are no errors, proceed with form submission
+       // If there are no errors, proceed with form submission
         axios
-          .post('http://localhost:3001/register', { username, email, password, gender })
-          .then((result) => {
-            console.log(result);
-            navigate('/login');
-          })
-          .catch((err) => console.log(err));
+        .post('http://localhost:3001/register', { username, email, password, gender })
+        .then((result) => {
+          console.log(result);
+          navigate('/login');
+        })
+        .catch((err) => {
+          // console.log(err.response.status)
+          if (err.response && err.response.status === 409) {
+            // Handle the case where the username already exists
+            setUsernameError('Username already exists. Please choose another one!');
+          } else {
+            // Handle other types of errors
+            console.log('Registration error:', err.message);
+          }
+        });
       };
     
 
@@ -171,7 +193,7 @@ const Register = () => {
                                     name="gender" 
                                     value="male" 
                                     checked={gender === 'male'}
-                                    onChange={handleGender} 
+                                    onChange={handleGenderChange} 
                                     className="mr-2"
                                 />
                                 <label htmlFor="male" className="font-roboto text-gray-500 mr-4">Male</label>
@@ -182,7 +204,7 @@ const Register = () => {
                                     name="gender" 
                                     value="female" 
                                     checked={gender === 'female'}
-                                    onChange={handleGender} 
+                                    onChange={handleGenderChange} 
                                     className="mr-2"
                                 />
                                 <label htmlFor="female" className="font-roboto text-gray-500">Female</label>
@@ -191,11 +213,18 @@ const Register = () => {
 
                     </div>
 
-                    <button onClick={handleSubmit} className="bg-gray-200 mt-8 mb-6 py-2 px-5 rounded-full shadow font-roboto text-black font-semibold">
+                    <div className="flex flex-col items-center mb-2">
+                      <button onClick={handleSubmit} className="bg-gray-200 mt-8 mb-2 py-2 px-5 rounded-full shadow font-roboto text-black font-semibold">
                         Submit
-                    </button>
+                      </button>
+                      {formIncomplete && (
+                          <p className="text-red-500">
+                          Oops! It looks like some information is missing or incorrect. Please check your entries and try again.
+                        </p>
+                      )}
+                    </div>
 
-                    <div className="font-roboto text-sky-600 ml-3 inline-flex items-center">
+                    <div className="font-roboto text-sky-600 ml-3 inline-flex items-center mb-2">
                         <span>Already have an account?</span>
                         <Link to="/Login">
                             <span className="font-bold underline cursor-pointer ml-2 px-2 py-1 rounded">Login!</span>

@@ -1445,6 +1445,10 @@ video {
     padding-right: 3rem;
   }
 
+  .md\:pl-4 {
+    padding-left: 1rem;
+  }
+
   .md\:text-left {
     text-align: left;
   }
