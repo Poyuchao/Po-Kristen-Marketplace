@@ -69,25 +69,39 @@ const ProductPage = () => {
 
 
           {/* products */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10 p-5">
+          {/* product bg */}
+          <section className="flex items-center py-20 bg-gray-50  ">
+            <div className="px-4 mx-auto max-w-7xl">
+                {/* each card size */}
+            <div className="grid grid-cols-1 gap-4  lg:gap-4  sm:gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4  p-5">
                 {filteredProducts.map((product) => {
                     return (
-                        <div key={product.id} className="max-w-xs md:max-w-sm w-full rounded overflow-hidden shadow-lg m-4">
-                            <div >
-                                <img className=" w-full h-48 object-cover" src={`http://localhost:3000${product.productImg}`} alt={product.productName} />
-                                <p className="font-semibold mb-1">{product.productName}</p>
-                                <p className="font-semibold mb-3">${product.price}</p>
+                        <div key={product.id} className=" max-w-xs md:max-w-sm w-full rounded overflow-hidden shadow m-4">
+                            <div className="mt-5">
+                                <div className="mb-5 flex justify-center items-center mx-auto" style={{ width: '90%' }}>
+                                <div className="w-64 h-64 relative overflow-hidden rounded">
+                                <img className=" absolute inset-0 w-full h-full object-cover transition-all hover:scale-110" src={`http://localhost:3000${product.productImg}`} alt={product.productName} />
+                                </div>
+                                </div>
+                                <p className="mb-2 text-xl font-bold text-center">{product.productName}</p>
+                                <p className="text-center text-lg  font-semibold mb-3"><span>${product.price}</span></p>
                               
-                                <button className="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-300 hover:border-transparent rounded"
+                                <button className="text-center justify-center bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-300 hover:border-transparent rounded"
                                  onClick={() =>{console.log("Adding to cart: ", product);addToCart(product)} }>
                                     Add To Cart
-                                </button>
+                                </button> 
+                                
                              
                             </div>
                         </div>
+                        
                     );
                 })}
             </div>
+            </div>
+
+          </section>
+            
         </div>
     );
 };
