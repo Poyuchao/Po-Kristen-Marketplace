@@ -5,21 +5,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter,faInstagram, faFacebookF, faGithub  } from '@fortawesome/free-brands-svg-icons';
 import { useUser } from "../../pages/authority/UserContext";
 import CartWidget from "../CartWidget/CartWidget";
+import { useNavigate } from 'react-router-dom';
+import { useCart } from "../../pages/cart/CartContext";
 
 const Header = () => {
      // Initialize open as false
      const [open, setOpen] = useState(false);
+
      // Use the useUser hook to access user data
      const { userData,logout} = useUser(); 
- 
+
+     // Access resetCart from CartContext    
+     const { resetCart } = useCart(); 
+     const navigate=useNavigate()
      // Toggle the mobile menu
      const toggleMenu = () => {
          setOpen(!open);
      };
-    
+
+     const handleLogout = () => {
+        logout(); // This will clear the userData
+        resetCart(); // clear the cart
+        navigate('/'); // Optionally redirect to login page
+    };
+
+     // Create a new array of links based on user login status
+     const adjustedNavLinks = userData
+     ? navlinks.map(link => link.title === "Login" ? { ...link, title: "Logout", action: handleLogout } : link)
+     : navlinks;
+
     return (
-       
-      
         <div className="bg-#FAFAFA relative"> {/* Added relative for positioning context */}
         <div className="bg-[#474747] flex justify-end items-center p-2 md:p-4 lg:p-6">
             {/* Twitter Icon */}
@@ -61,17 +76,13 @@ const Header = () => {
                         <div className="justify-center flex items-baseline space-x-4">
                                                             {/* Centered links */}
                                 <div className="flex justify-center space-x-4 mx-auto">
-                                    {/* Assuming that the last link in your navlinks array is the cart. 
-                                        So, we'll map over all but the last link for the centered links. */}
-                                    {navlinks.slice(0, -1).map((link, index) => (
-                                        <a
-                                            key={index}
-                                            className="text-black transition-all duration-500 hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium"
-                                            href={link.link}
-                                        >
-                                            {link.title}
-                                        </a>
+                                    {/* Map over adjustedNavLinks for rendering */}
+                                    {adjustedNavLinks.map((link, index) => (
+                                        link.action 
+                                            ? <button key={index} onClick={link.action} className="text-black hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</button>
+                                            : <a key={index} href={link.link} className="text-black hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</a>
                                     ))}
+                                 
                                 </div>
                                
                                   {/* Display user data if available */}

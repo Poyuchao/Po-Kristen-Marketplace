@@ -21,8 +21,18 @@ export function UserProvider({ children }) {
 
   console.log('User Provider Rendered:', userData); // Log whenever the UserProvider component is rendered
 
+  //logout
+  const logout = () => {
+    setUserData(null);
+    try {
+      localStorage.removeItem('userData');
+    } catch (error) {
+      console.error('Error clearing user data from local storage:', error);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={{ userData, setUserData, logout }}>
       {children}
     </UserContext.Provider>
   );
