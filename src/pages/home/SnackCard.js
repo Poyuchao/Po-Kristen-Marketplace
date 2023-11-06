@@ -6,6 +6,11 @@ import { faCookie, faCandyCane, faBirthdayCake, faMugHot } from '@fortawesome/fr
 
 
 const SnackCard = ({ title, description, icon }) => {
+
+
+
+
+
     return (
       <div className="w-64 h-96 flex flex-col items-center p-6 bg-white shadow-lg rounded-xl">
         <div className="mb-4 w-24 h-24 flex items-center justify-center bg-gray-100 rounded-full">
@@ -26,7 +31,7 @@ const SnackCard = ({ title, description, icon }) => {
         </div>
         <h2 className="text-xl font-bold mb-2">{title}</h2>
         <p className="text-center flex-1">{description}</p>
-        <button className="bg-[#888888] hover:bg-red-600 text-white px-6 py-3 rounded mt-4 transition duration-300">Explore Menu</button>
+        <button  className="bg-[#888888] hover:bg-red-600 text-white px-6 py-3 rounded mt-4 transition duration-300">Explore Menu</button>
       </div>
     );
   };
