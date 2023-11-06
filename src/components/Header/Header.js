@@ -153,13 +153,15 @@ const Header = () => {
                     {/*mobile-menu*/}
                     {open && (
                     <div className="md:hidden absolute top-full left-0 w-full bg-neutral-500 bg-opacity-50 shadow-lg p-4 z-50"> {/* Added z-50 to ensure dropdown menu appears on top */}
-                        {navlinks.map(({ title, link }, index) => (
+                        {navlinks.map(({ title, link,icon }, index) => (
                             <div key={index} className="mb-2">
                                 <a
                                     className="text-white transition-all duration-500 hover:bg-neutral-600 bg-opacity-50 hover:text-white px-3 py-2 block rounded-md text-md font-medium"
                                     href={link}
                                 >
-                                    {title}
+                                    {/*If icon is present (which evaluates to true), it will display the word "Cart".
+                                        If icon is not present (which evaluates to false), it will display the title specified in the navlinks.*/}
+                                   {icon ? "Cart" : title} {/* Display 'Cart' if there's an icon */}
                                 </a>
                             </div>
                         ))}
