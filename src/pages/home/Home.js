@@ -2,6 +2,7 @@ import React from "react";
 import SnacksSection from './SnacksSection';
 
 
+
 const Home = () => {
     return (
         <div className="flex flex-col min-h-screen"> 
@@ -22,7 +23,8 @@ const Home = () => {
                     </p>
 
                     <button className=" px-8 py-4 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition duration-300 ease-in-out">
-                            Go Snacking!
+                            
+                            <a href="/products">Go Snacking!</a>
                     </button>
                     {/* Add space  */}
                     <div className="mb-4"></div>
