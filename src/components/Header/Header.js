@@ -65,10 +65,10 @@ const Header = () => {
                             className="h-20 w-20 rounded-full"
                         />
                         {/* Store name */}
-                        <a href="/" className="text-black ml-3 text-2xl font-medium">
+                        <span><a href="/" className=" font-mono  text-gray-700 ml-3 text-2xl font-medium">
                             Taiwan Good Stuff
                             
-                        </a>
+                        </a></span>
 
                     </div>
                     {/* Navigation Links */}
@@ -79,20 +79,20 @@ const Header = () => {
                                     {/* Map over adjustedNavLinks for rendering */}
                                     {adjustedNavLinks.map((link, index) => (
                                         link.action 
-                                            ? <button key={index} onClick={link.action} className="text-black hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</button>
-                                            : <a key={index} href={link.link} className="text-black hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</a>
+                                            ? <button key={index} onClick={link.action} className="text-mono text-gray-700  hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</button>
+                                            : <a key={index} href={link.link} className="text-mono text-gray-700  hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</a>
                                     ))}
                                  
                                 </div>
                                
                                   {/* Display user data if available */}
                                     {userData ? (
-                                        <span className="text-black text-xl font-medium">
+                                        <span className="text-mono text-gray-700  text-xl font-medium">
                                             Hi, {userData.username}!
                                         </span>
                                         
                                     ) : (
-                                        <span className="text-black text-xl font-medium">
+                                        <span className="text-mono text-gray-700 text-xl font-medium">
                                             Welcome, Guest!
                                         </span>
                                     )}
