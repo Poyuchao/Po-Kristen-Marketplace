@@ -16,7 +16,7 @@ const ForgetPassword = () => {
             const response = await axios.post('http://localhost:3001/ForgetPassword', { email });
             if (response.status === 200) {
                 // Navigate to the reset password page
-                navigate('/reset'); // Replace with your reset password page route
+                navigate('/reset'); 
             }
         } catch (error) {
             console.error('Error sending reset email:', error);
