@@ -5,7 +5,7 @@ export {default as Register} from "./authority/Register";
 export {default as Reset} from "./authority/Reset";
 export {default as ProductPage} from "./products/ProductPage";
 export {default as Cart} from "./cart/Cart";
-
+export {default as ForgetPassword} from "./authority/ForgetPassword"
 
 
 

@@ -13,6 +13,12 @@ const Reset = () => {
     return (
         <div className="bg-white flex justify-center w-full pt-5">
             <div className="bg-white max-w-4xl w-full relative rounded-xl shadow-lg pt-2.5 mt-20 mb-20 flex space-x-2.5 min-h-max">
+                <div className="flex-1 px-2.5 bg-gray-400 rounded-l-xl">
+                    <div className="p-5">
+                        <h1 className="font-bold text-4xl sm:text-2xl text-black text-shadow mt-12 text-center"></h1>
+                        <img src={logo} alt="Taiwan Good Stuff Logo" className="w-full rounded-full shadow-lg mt-8 mb-8" />
+                    </div>
+                </div>
                 <div className="flex-1 px-2.5 flex flex-col justify-center items-center rounded-r-xl">
                 <h2 className="font-bold text-xl sm:text-2xl text-black text-shadow mb-4 text-center">Reset Password</h2>
               
@@ -57,12 +63,7 @@ const Reset = () => {
                     </div>
                 </div>
 
-                <div className="flex-1 px-2.5 bg-gray-400 rounded-r-xl">
-                    <div className="p-5">
-                        <h1 className="font-bold text-4xl sm:text-2xl text-black text-shadow mt-12 text-center"></h1>
-                        <img src={logo} alt="Taiwan Good Stuff Logo" className="w-full rounded-full shadow-lg mt-8 mb-8" />
-                    </div>
-                </div>
+               
             </div>
         </div>
                       

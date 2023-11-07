@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const CustomerModel = require('./Model/user');
+const nodemailer=require('nodemailer');
 const cors = require('cors'); // Add this
 const app = express();
 
@@ -16,6 +17,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
   .catch(error => {
     console.error('Could not connect to MongoDB', error);
   });
+
+  // handle user login request 
   app.post("/login", async (req, res) => {
     const { username, password } = req.body;
   
@@ -46,7 +49,68 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
       return res.status(500).json({ message: "An error occurred" });
     }
   });
+
+  // handle user verification code request. 
+  app.post('/ForgetPassword', async(req,res)=>{
+      const {email} = req.body; // Adjusted to match the frontend
+      console.log(email);
+      // generate four digits code 
+      const codeGenerator = () => {
+        return Math.floor(1000 + Math.random() * 9000).toString(); // Generates a 4-digit code
+      };
+      try {
+         const user = await CustomerModel.findOne({email: email })
+        
+          if (!user) {
+             return res.status(404).json({message: "Sorry! We can't find your email!"});
+          }
+          // if find user email, randomly create four digits code send to the user mail account
+          const verificationCode = codeGenerator(); 
+          user.passwordResetCode= verificationCode;
+          const userName = user.username 
+          console.log(userName)
+          console.log(user.passwordResetCode);
+          user.resetCodeExpires = Date.now() + (10 * 60 * 1000); // after 10 minutes the verification code will be expired 
+          await user.save();
+          // Setup Nodemailer and send the email
+          // create a transporter object that can send emails using SMTP (Simple Mail Transfer Protocol). 
+          let transporter = nodemailer.createTransport({
+            service: 'gmail', // Email service provider
+            auth: {
+                user: 'killyen444@gmail.com', // Your email address
+                pass: 'wifm wgnd ggfn mirs' // Your email account password or App Password
+            }
+          });
+          // ... (Nodemailer setup and sendMail call)
+          let mailOptions = {
+            from: '"Taiwan Good Stuff" <killyen444@gmail.com>', // Sender address
+            to: email, // Recipient email, which is the user's email
+            subject: 'Password Reset Verification Code', // Subject line
+            // Plain text body using backticks and ${variable}
+            text: `Hi ${userName}, your password verification code is: ${verificationCode}`, 
+            // HTML body using backticks and ${variable}
+            html: `<p><strong>Hi ${userName}</strong>,<br>Your password verification code is: <strong>${verificationCode}</strong></p>` 
+        };
+        
+
+          // Send the email
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+                res.status(500).json({ message: 'Error sending verification email' });
+            } else {
+                console.log('Email sent: ' + info.response);
+                res.status(200).json({ message: 'Verification email sent' });
+            }
+          });
+
+      }catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    } 
+  });
   
+  // handle user register request
   app.post('/register', async (req, res) => {
     const { username } = req.body;
   
