@@ -56,27 +56,33 @@ const ProductPage = () => {
       
         <div>
             {/* add filter button */}
-            <div className="my-4">
-                <button button onClick={()=> handleFilterChange("all")} className={`py-2 px-4  ${filter === 'all' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>ALL</button>
-                <button button onClick={()=> handleFilterChange("Cookies")} className={`py-2 px-4 ${filter === 'Cookies' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Cookies</button>
-                <button button onClick={()=> handleFilterChange("Sweets")} className={`py-2 px-4 ${filter === 'Sweets' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Sweets</button>
-                <button button onClick={()=> handleFilterChange("Pastries")} className={`py-2 px-4 ${filter === 'Pastries' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Pastries</button>
-                <button button onClick={()=> handleFilterChange("Drinks")} className={`py-2 px-4 ${filter === 'Drinks' ? 'bg-red-500 text-white' : 'bg-transparent text-gray-500'}`}>Drinks</button>
-                
+        {/* Enhanced filter buttons */}
+        
+        <div className="flex justify-center">
 
-            </div>
+        <div className="my-4 flex flex-wrap gap-5">
+            <button onClick={() => handleFilterChange("all")} className={`py-2 px-4 rounded-lg shadow-md text-sm font-medium ${filter === 'all' ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}>ALL</button>
+            <button onClick={() => handleFilterChange("Cookies")} className={`py-2 px-4 rounded-lg shadow-md text-sm font-medium ${filter === 'Cookies' ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}>Cookies</button>
+            <button onClick={() => handleFilterChange("Sweets")} className={`py-2 px-4 rounded-lg shadow-md text-sm font-medium ${filter === 'Sweets' ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}>Sweets</button>
+            <button onClick={() => handleFilterChange("Pastries")} className={`py-2 px-4 rounded-lg shadow-md text-sm font-medium ${filter === 'Pastries' ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}>Pastries</button>
+            <button onClick={() => handleFilterChange("Drinks")} className={`py-2 px-4 rounded-lg shadow-md text-sm font-medium ${filter === 'Drinks' ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}>Drinks</button>
+        </div>
+
+
+        </div>
+
 
 
 
           {/* products */}
           {/* product bg */}
           <section className="flex items-center py-20 bg-gray-50  ">
-            <div className="px-4 mx-auto max-w-7xl">
+            <div className="px-4 mx-auto max-w-7xl ">
                 {/* each card size */}
             <div className="grid grid-cols-1 gap-4  lg:gap-4  sm:gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4  p-5">
                 {filteredProducts.map((product) => {
                     return (
-                        <div key={product.id} className=" max-w-xs md:max-w-sm w-full rounded overflow-hidden shadow m-4">
+                        <div key={product.id} className=" max-w-xs md:max-w-sm w-full rounded overflow-hidden shadow-xl m-4">
                             <div className="mt-5">
                                 <div className="mb-5 flex justify-center items-center mx-auto" style={{ width: '90%' }}>
                                 <div className="w-64 h-64 relative overflow-hidden rounded">
