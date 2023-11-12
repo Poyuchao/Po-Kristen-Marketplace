@@ -21,6 +21,8 @@ const ProductPage = () => {
 // Effect hook for fetching product data on the initial render.
     useEffect(() => {
 
+        
+
             // Extract the category from query parameters
         const queryParams = new URLSearchParams(location.search);
         const categoryFromURL = queryParams.get('category');
@@ -32,14 +34,8 @@ const ProductPage = () => {
 
 
 
-
-
-
-
-
-
         // Fetch product data from a local server running on port 3000.
-        fetch(`http://localhost:3000/products${categoryFromURL ? `?category=${categoryFromURL}` : ''}`)
+        fetch('http://localhost:3000/products')
             .then(response => {
               // Check for unsuccessful network responses.
                 if (!response.ok) {
@@ -58,7 +54,7 @@ const ProductPage = () => {
                 setLoading(false);
             });
     }, [location]);// Add location to the dependency array
-    
+
 // Display a loading message while fetching data.
     if (loading) return <div>Loading...</div>;
   // Display any errors that occur during data fetching.
