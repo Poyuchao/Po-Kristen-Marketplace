@@ -96,41 +96,44 @@ const Register = () => {
       setGender(e.target.value);
     };
     
-     const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (gender===''){
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      if (gender === '') {
           setFormIncomplete(true);
           console.log('Form has errors. Please fix them.');
           return;
-        }
-
-        // Check if there are any error messages
-        if (usernameError || emailError || passwordError) {
+      }
+  
+      // Check if there are any error messages
+      if (usernameError || emailError || passwordError) {
           setFormIncomplete(true);
-          // There are errors, do not proceed with submission
           console.log('Form has errors. Please fix them.');
+          alert('Oops! It looks like some information is missing or incorrect. Please check your entries and try again.');
           return;
-        }
-      
-       // If there are no errors, proceed with form submission
-        axios
-        .post('http://localhost:3001/register', { username, email, password, gender })
-        .then((result) => {
+      }
+    
+      // If there are no errors, proceed with form submission
+      axios.post('http://localhost:3001/register', { username, email, password, gender })
+      .then((result) => {
           console.log(result);
           navigate('/login');
-        })
-        .catch((err) => {
-          // console.log(err.response.status)
+      })
+      .catch((err) => {
           if (err.response && err.response.status === 409) {
-            // Handle the case where the username already exists
-            setUsernameError('Username already exists. Please choose another one!');
+              const errorMessage = err.response.data.message;
+              if (errorMessage.includes('Username')) {
+                  setUsernameError('Username already exists. Please choose another one!');
+              } else if (errorMessage.includes('Email')) {
+                  setEmailError('Email already exists. Please choose another one!');
+              }
           } else {
-            // Handle other types of errors
-            console.log('Registration error:', err.message);
+              // Handle other types of errors
+              console.log('Registration error:', err.message);
           }
-        });
-      };
+      });
+  };
+  
     
 
     return (
@@ -217,11 +220,13 @@ const Register = () => {
                       <button onClick={handleSubmit} className="bg-gray-200 mt-8 mb-2 py-2 px-5 rounded-full shadow font-roboto text-black font-semibold">
                         Submit
                       </button>
+                      {/*}
                       {formIncomplete && (
                           <p className="text-red-500">
                           Oops! It looks like some information is missing or incorrect. Please check your entries and try again.
                         </p>
                       )}
+                      **/}
                     </div>
 
                     <div className="font-roboto text-sky-600 ml-3 inline-flex items-center mb-2">

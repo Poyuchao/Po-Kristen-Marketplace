@@ -138,29 +138,37 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
   
   // handle user register request
   app.post('/register', async (req, res) => {
-    const { username } = req.body;
+    const { username, email } = req.body;
   
     try {
-      // Check if the username already exists in the database
-      const existingUser = await CustomerModel.findOne({ username: username });
-  
-      if (existingUser) {
-        // If a user with the username already exists, return a conflict response
-        console.log('Username already exists:', username);
-        res.status(409).json({ message: 'Username already exists' });
-      } else {
-        // No user exists with this username, so create a new user
+        // Check if the username already exists in the database
+        const existingUser = await CustomerModel.findOne({ username: username });
+
+        if (existingUser) {
+            // If a user with the username already exists, return a conflict response
+            console.log('Username already exists:', username);
+            return res.status(409).json({ message: 'Username already exists' });
+        }
+
+        // Check if the email already exists in the database
+        const existingMail = await CustomerModel.findOne({ email: email });
+        if (existingMail) {
+            // If an email already exists, return a conflict response
+            console.log('Email already exists:', email);
+            return res.status(409).json({ message: 'Email already exists' });
+        }
+
+        // No user exists with this username or email, so create a new user
         const newUser = await CustomerModel.create(req.body);
-        // New user created successfully, return the user data
         console.log('User created successfully:', newUser);
         res.status(201).json(newUser);
-      }
+      
     } catch (err) {
-      // If there's an error during the operation, return an error response
-      console.error('Error during registration process:', err);
-      res.status(500).json({ message: 'Error during registration process' });
+        console.error('Error during registration process:', err);
+        res.status(500).json({ message: 'Error during registration process' });
     }
-  });
+});
+
 
 
 
