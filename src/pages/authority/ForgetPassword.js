@@ -1,6 +1,6 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState} from 'react';
 import logo from '../../image/logo.png';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios'; // import axios for making HTTP requests
 import { useNavigate } from 'react-router-dom';
 
@@ -16,11 +16,13 @@ const ForgetPassword = () => {
             const response = await axios.post('http://localhost:3001/ForgetPassword', { email });
             if (response.status === 200) {
                 // Navigate to the reset password page
+                alert('Verification code has been sent !');
                 navigate('/reset'); 
             }
         } catch (error) {
             console.error('Error sending reset email:', error);
             // Handle errors (e.g., display an error message)
+            alert('Please enter your email !');
         }
     };
 

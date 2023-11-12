@@ -89,7 +89,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
             // Plain text body using backticks and ${variable}
             text: `Hi ${userName}, your password verification code is: ${verificationCode}`, 
             // HTML body using backticks and ${variable}
-            html: `<p><strong>Hi ${userName}</strong>,<br>Your password verification code is: <strong>${verificationCode}</strong></p>` 
+            html: `<p><strong>Hi ${userName}</strong>,<br>Your password verification code is: <strong>${verificationCode}</strong>, please enter the code to reset your password.</p>` 
         };
         
 
@@ -108,6 +108,32 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
         console.error(err);
         res.status(500).json({ message: 'Server error' });
     } 
+  });
+
+  app.post('/reset',async(req,res)=>{
+    const {verificationCode, newPassword } = req.body;
+    try {
+       // Find the user with the given verification code 
+       //"Find me the first user in the database whose passwordResetCode matches the given verificationCode
+       // and whose resetCodeExpires time is still in the future (i.e., the code hasn't expired yet)."
+       const user = await CustomerModel.findOne({ passwordResetCode: verificationCode, resetCodeExpires: { $gt: Date.now() } });
+
+       if (!user){
+        // Verification code is incorrect or expired
+         return res.status(400).json({message: "Invalid or expired verification code" });
+        }
+         // Update the user's password without hashing
+         user.password = newPassword;
+         user.passwordResetCode = null; // clear the verification code
+         user.resetCodeExpires = undefined // clear the expiry time 
+         await user.save();
+
+         // send a success response 
+         res.status(200).json({message: 'Password has been reset successfully'});
+       }catch (error) {
+        console.error('Error in password reset:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
   });
   
   // handle user register request
