@@ -102,6 +102,7 @@ const Register = () => {
       if (gender === '') {
           setFormIncomplete(true);
           console.log('Form has errors. Please fix them.');
+          alert('Oops! It looks like some information is missing or incorrect. Please check your entries and try again.');
           return;
       }
   
