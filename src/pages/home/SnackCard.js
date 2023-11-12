@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCookie, faCandyCane, faBirthdayCake, faMugHot } from '@fortawesome/free-solid-svg-icons';
-
+import CategoryButton from './CategoryButton';
 
 
 
@@ -31,7 +31,8 @@ const SnackCard = ({ title, description, icon }) => {
         </div>
         <h2 className="text-xl font-bold mb-2">{title}</h2>
         <p className="text-center flex-1">{description}</p>
-        <button  className="bg-[#888888] hover:bg-red-600 text-white px-6 py-3 rounded mt-4 transition duration-300">Explore Menu</button>
+        <CategoryButton category={title} />
+        {/* <button  className="bg-[#888888] hover:bg-red-600 text-white px-6 py-3 rounded mt-4 transition duration-300">Explore Menu</button> */}
       </div>
     );
   };
