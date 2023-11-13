@@ -1,8 +1,9 @@
 
-
 import React, { useState, useEffect } from "react";
 import { useCart } from "../cart/CartContext"; // import use cart
 import { useLocation } from "react-router-dom"; 
+import Lightbox from "./Lightbox"; // import lightbox 
+
 
 const ProductPage = () => {
 
@@ -16,6 +17,11 @@ const ProductPage = () => {
     //state for track the current filter
     const [filter, setFilter] = useState("all");
     const location = useLocation(); // Use the useLocation hook
+
+    const [lightboxOpen, setLightboxOpen] = useState(false);//control light box
+   
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
 
 
 // Effect hook for fetching product data on the initial render.
@@ -67,6 +73,30 @@ const ProductPage = () => {
       };
     const filteredProducts = filter === "all" ? products : products.filter(product => product.category === filter);
 
+    
+    //handle opening the lightbox
+    const openLightbox = (product) =>{
+
+        setSelectedProduct(product);
+        setLightboxOpen(true);//open
+
+
+    }
+
+   // handle closing the lightbox
+
+   const closeLightbox = () =>{
+        setLightboxOpen(false); //close
+        setSelectedProduct(null);
+
+   }
+
+
+
+
+
+
+
  // Render the grid of products.
 //  grid, grid-cols-1, shadow-md, hover:shadow-xl, etc. for layout and effects.
 //font-semibold, py-2, px-4, border, etc. for typography and button styling.
@@ -104,7 +134,13 @@ const ProductPage = () => {
                             <div className="mt-5">
                                 <div className="mb-5 flex justify-center items-center mx-auto" style={{ width: '90%' }}>
                                 <div className="w-64 h-64 relative overflow-hidden rounded">
-                                <img className=" absolute inset-0 w-full h-full object-cover transition-all hover:scale-110" src={`http://localhost:3000${product.productImg}`} alt={product.productName} />
+                                <img 
+                                    className=" absolute inset-0 w-full h-full object-cover transition-all hover:scale-110" 
+                                    src={`http://localhost:3000${product.productImg}`} 
+                                    alt={product.productName} 
+                                    onClick={()=> openLightbox(product)}
+
+                                />
                                 </div>
                                 </div>
                                 <p className="mb-2 text-xl font-bold text-center">{product.productName}</p>
@@ -125,7 +161,20 @@ const ProductPage = () => {
             </div>
 
           </section>
-            
+
+                    {
+            selectedProduct && (
+                <Lightbox 
+                isOpen={lightboxOpen}
+                image={`http://localhost:3000${selectedProduct.productImg}`}
+                title={selectedProduct.productName}
+                price={`$${selectedProduct.price}`} // Format price as needed
+                description={selectedProduct.description}
+                onClose={closeLightbox}
+                />
+            )
+            }
+
         </div>
     );
 };

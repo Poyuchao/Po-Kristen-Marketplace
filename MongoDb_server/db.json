@@ -1,4 +1,3 @@
-
 {
     "products": [
       {
@@ -6,64 +5,72 @@
         "productName": "Good Luck Corn",
         "price": 2.5,
         "productImg": "/ProductImg/Cookies/GoodLuckCorn.webp",
-        "category" : "Cookies"
+        "category": "Cookies",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 2,
         "productName": "Lonely-God Potato Twist",
         "price": 3.5,
         "productImg": "/ProductImg/Cookies/Lonely_God_Potato_Twist.webp",
-        "category" : "Cookies"
+        "category": "Cookies",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 3,
         "productName": "Peacock Biscuit",
         "price": 8.5,
         "productImg": "/ProductImg/Cookies/PeacockBiscuit.avif",
-        "category" : "Cookies"
+        "category": "Cookies",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 4,
         "productName": "Castella TW",
         "price": 9.0,
         "productImg": "/ProductImg/Pastries/CastellaTW.jpeg",
-        "category" : "Pastries"
+        "category": "Pastries",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 5,
         "productName": "Pineapple Cake",
         "price": 3.5,
         "productImg": "/ProductImg/Pastries/Pineapple_Pastry.JPG",
-        "category" : "Pastries"
+        "category": "Pastries",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 6,
         "productName": "Hi-Chew",
         "price": 1.5,
         "productImg": "/ProductImg/Sweets/HiChew.jpg",
-        "category" : "Sweets"
+        "category": "Sweets",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 7,
         "productName": "Milk Candy",
         "price": 1.5,
         "productImg": "/ProductImg/Sweets/MilkCandy.jpg",
-        "category" : "Sweets"
-        
+        "category": "Sweets",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 8,
         "productName": "Apple Soda",
         "price": 2.5,
         "productImg": "/ProductImg/Drinks/AppleSoda.webp",
-        "category" : "Drinks"
+        "category": "Drinks",
+        "description": "Net Weight: 22g. Made in Taiwan."
       },
       {
         "id": 9,
         "productName": "Hey-Song",
         "price": 2.5,
         "productImg": "/ProductImg/Drinks/HeySong.jpg",
-        "category" : "Drinks"
+        "category": "Drinks",
+        "description": "Net Weight: 22g. Made in Taiwan."
       }
     ]
   }
