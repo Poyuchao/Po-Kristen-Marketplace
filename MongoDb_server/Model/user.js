@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
   password: String, // Remember to hash this in a real-world application!
   gender: String,
   passwordResetCode: String, // Field to store the password reset code
-  resetCodeExpires: Date // Field to store the expiration time of the reset code
+  resetCodeExpires: Date, // Field to store the expiration time of the reset code
+  cart: []  // field to store user shopping item 
 });
 
 const CustomerModel = mongoose.model('Customers', userSchema);

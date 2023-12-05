@@ -18,6 +18,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
     console.error('Could not connect to MongoDB', error);
   });
 
+  
+ 
   // handle user login request 
   app.post("/login", async (req, res) => {
     const { username, password } = req.body;
@@ -109,7 +111,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
         res.status(500).json({ message: 'Server error' });
     } 
   });
-
+  
+  //handle user password reset 
   app.post('/reset',async(req,res)=>{
     const {verificationCode, newPassword } = req.body;
     try {

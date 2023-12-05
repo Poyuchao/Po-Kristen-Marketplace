@@ -18,7 +18,6 @@ export const CartProvider = ({children}) => {
 
     const addToCart = (product) =>{
        
-
         setCart(prevCart => {
 
              // check if the product is already in the cart
@@ -42,8 +41,6 @@ export const CartProvider = ({children}) => {
                 return updatedCart;
 
             }
-
-
         }) ;
 
 

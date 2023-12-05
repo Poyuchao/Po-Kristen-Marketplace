@@ -7,7 +7,7 @@ import { BsFillCartFill } from 'react-icons/bs';
 const CartWidget = ({link,title}) => {
 
     const {cart} = useCart();
-
+    console.log(cart);
     //count total items in the cart
     const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
