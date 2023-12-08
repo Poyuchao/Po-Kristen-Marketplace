@@ -55,7 +55,7 @@ export const CartProvider = ({children}) => {
                    
                 );
                 fetchCart(); // Fetch the updated cart from the server   
-                
+               
                 // Fetch the updated cart from the server or handle the server response
             } catch (error) {
                 console.error('Error adding item to cart:', error);

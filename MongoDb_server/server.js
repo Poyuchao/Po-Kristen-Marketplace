@@ -44,7 +44,7 @@ app.get('/api/cart', async (req, res) => {
   // Add item to user's cart
   app.post('/api/cart/add', async (req, res) => {
     const { username, product } = req.body;
-    console.log(username,product);
+    // console.log(username,product);
     try {
         const user = await CustomerModel.findOne({ username: username });
         if (!user) {
@@ -63,6 +63,7 @@ app.get('/api/cart', async (req, res) => {
 
         await user.save();
         res.status(200).json({ message: "Product added to cart", cart: user.cart });
+       
     } catch (error) {
         console.error('Error updating cart:', error);
         res.status(500).json({ message: "Internal Server Error" });
