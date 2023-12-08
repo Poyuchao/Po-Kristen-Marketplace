@@ -18,8 +18,177 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
     console.error('Could not connect to MongoDB', error);
   });
 
-  
- 
+ {/**below functions handle users updating cart requests */}
+ // GET request to fetch a user's cart
+app.get('/api/cart', async (req, res) => {
+  const username = req.query.username; // Get the username from query parameters
+  try {
+      // Find the user by their username
+      const user = await CustomerModel.findOne({ username: username });
+
+      if (!user) {
+          // If no user is found, send a 404 response
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Respond with the user's cart data
+      res.status(200).json(user.cart);
+  } catch (error) {
+      // Handle potential errors
+      console.error('Error fetching user cart:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+  // Add item to user's cart
+  app.post('/api/cart/add', async (req, res) => {
+    const { username, product } = req.body;
+    console.log(username,product);
+    try {
+        const user = await CustomerModel.findOne({ username: username });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Check if the product already exists in the cart
+        const productIndex = user.cart.findIndex(item => item.id === product.id);
+        if (productIndex !== -1) {
+            // Update quantity if product exists
+            user.cart[productIndex].quantity += 1; // Or any specific logic for quantity
+        } else {
+            // Add new product to the cart
+            user.cart.push({ ...product, quantity: 1 }); // Adjust according to your schema
+        }
+
+        await user.save();
+        res.status(200).json({ message: "Product added to cart", cart: user.cart });
+    } catch (error) {
+        console.error('Error updating cart:', error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
+  // handle login user increase quantity
+  app.post('/api/cart/increaseQuantity', async (req, res) => {
+    const { username, productName } = req.body;
+
+    try {
+        const user = await CustomerModel.findOne({ username: username });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Find the product in the user's cart and increase the quantity
+        const product = user.cart.find(item => item.productName === productName);
+        if (product) {
+            product.quantity += 1;
+        }
+
+        await user.save();
+        res.status(200).json(user.cart);
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+
+    // POST request to decrease quantity of a product in the cart
+    app.post('/api/cart/decreaseQuantity', async (req, res) => {
+      const { username, productName } = req.body;
+
+      try {
+          // Find user by username
+          const user = await CustomerModel.findOne({ username: username });
+          if (!user) {
+              return res.status(404).json({ message: 'User not found' });
+          }
+
+          // Find the product in the user's cart
+        const productIndex = user.cart.findIndex(item => item.productName === productName);
+        if (productIndex === -1) {
+            return res.status(404).json({ message: 'Product not found in cart' });
+        }
+
+        // Decrease the quantity, but not below 1
+        if (user.cart[productIndex].quantity > 1) {
+            user.cart[productIndex].quantity -= 1;
+        } else {
+            // Optionally, remove the item if its quantity goes to 0
+            user.cart.splice(productIndex, 1);
+        }
+
+        await user.save();
+        res.status(200).json({ message: 'Quantity decreased', cart: user.cart });
+    } catch (error) {
+        console.error('Error in decreasing quantity:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
+  // POST request to remove a product from the cart
+  app.post('/api/cart/remove', async (req, res) => {
+  const { username, productName } = req.body;
+
+  try {
+      const user = await CustomerModel.findOne({ username: username });
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Remove the product from the cart
+      user.cart = user.cart.filter(item => item.productName !== productName);
+      await user.save();
+
+      res.status(200).json({ message: 'Product removed from cart', cart: user.cart });
+  } catch (error) {
+      console.error('Error removing product from cart:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// post request to reset product from cart 
+app.post('/api/cart/resetCart', async (req, res) => {
+  const { username } = req.body;
+
+  try {
+      const user = await CustomerModel.findOne({ username: username });
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Reset the cart
+      user.cart = [];
+      await user.save();
+
+      res.status(200).json({ message: 'Cart reset successfully' });
+  } catch (error) {
+      console.error('Error resetting cart:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Endpoint to save the cart
+app.post('/api/cart/save', async (req, res) => {
+  const { username, cart } = req.body;
+
+  try {
+      const user = await CustomerModel.findOne({ username });
+      if (!user) {
+          return res.status(404).send('User not found');
+      }
+
+      user.cart = cart;
+      await user.save();
+
+      res.status(200).send('Cart saved successfully');
+  } catch (error) {
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+  {/**below functions handle users login, register, reset password requests*/}
   // handle user login request 
   app.post("/login", async (req, res) => {
     const { username, password } = req.body;
@@ -173,6 +342,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/Customer')
 });
 
 
+
+
+
+app.get("/getUserData", async (req, res) => {
+  try {
+    const usercart = await CustomerModel.find().select('username cart -_id'); // Fetch username and cart
+    res.json(usercart);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 const PORT = 3001;

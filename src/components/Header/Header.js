@@ -13,10 +13,10 @@ const Header = () => {
      const [open, setOpen] = useState(false);
 
      // Use the useUser hook to access user data
-     const { userData,logout} = useUser(); 
+     const {userData,logout} = useUser(); 
 
      // Access resetCart from CartContext    
-     const { resetCart } = useCart(); 
+     const { addressLogout} = useCart(); 
      const navigate=useNavigate()
      // Toggle the mobile menu
      const toggleMenu = () => {
@@ -25,7 +25,7 @@ const Header = () => {
 
      const handleLogout = () => {
         logout(); // This will clear the userData
-        resetCart(); // clear the cart
+        addressLogout();
         navigate('/'); // Optionally redirect to login page
     };
 
@@ -74,15 +74,17 @@ const Header = () => {
                     {/* Navigation Links */}
                     <div className="hidden md:block flex-grow">
                         <div className="justify-center flex items-baseline space-x-4">
-                                                            {/* Centered links */}
+                                {/* Centered links */}
                                 <div className="flex justify-center space-x-4 mx-auto">
                                     {/* Map over adjustedNavLinks for rendering */}
                                     {adjustedNavLinks.map((link, index) => (
-                                        link.action 
-                                            ? <button key={index} onClick={link.action} className="text-mono text-gray-700  hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</button>
-                                            : <a key={index} href={link.link} className="text-mono text-gray-700  hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</a>
+                                        // Check if it's not the last element before rendering
+                                        index < adjustedNavLinks.length - 1 ? (
+                                            link.action 
+                                                ? <button key={index-1} onClick={link.action} className="text-mono text-gray-700  hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</button>
+                                                : <a key={index} href={link.link} className="text-mono text-gray-700  hover:bg-gray-600 hover:text-white px-3 py-2 rounded-md text-xl font-medium">{link.title}</a>
+                                        ) : null
                                     ))}
-                                 
                                 </div>
                                
                                   {/* Display user data if available */}

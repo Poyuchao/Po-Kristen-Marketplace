@@ -16,7 +16,7 @@ const Cart = () =>{
   const renderCartContents = () => {
 
     if(cart.length === 0 ){
-
+      
       return <div className="text-center text-gray-500 my-4 font-bold border-2 border-gray-300 bg-white p-6 rounded-xl shadow-md ">Your cart is empty</div>;
 
     }else{
