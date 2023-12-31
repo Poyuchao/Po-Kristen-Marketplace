@@ -10,13 +10,29 @@ app.use(cors()); // Use the CORS middleware
 app.use(express.json()); // Middleware to parse JSON requests
 
 // connect to mongoDB database
-mongoose.connect('mongodb://127.0.0.1:27017/Customer')
+// mongoose.connect('mongodb://127.0.0.1:27017/Customer')
+//   .then(() => {
+//     console.log('Connected to MongoDB');
+//   })
+//   .catch(error => {
+//     console.error('Could not connect to MongoDB', error);
+//   });
+
+// MongoDB Atlas connection 
+
+
+
+mongoose.connect('mongodb+srv://jiayuhsu8240:A1671821@cluster0.1xozqhw.mongodb.net/myDatabase?retryWrites=true&w=majority')
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB Atlas');
   })
   .catch(error => {
-    console.error('Could not connect to MongoDB', error);
+    console.error('Could not connect to MongoDB Atlas', error);
   });
+
+
+
+
 
  {/**below functions handle users updating cart requests */}
  // GET request to fetch a user's cart
@@ -360,5 +376,10 @@ const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server is running`);
 });
+
+// const PORT = 3001;
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
 
 

@@ -1,0 +1,132 @@
+[{
+  "_id": {
+    "$oid": "65395d20ac8bfca738c832fa"
+  },
+  "username": "bubu",
+  "email": "bubu",
+  "password": "123",
+  "gender": "female",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653e6b48673929bc8249c8b4"
+  },
+  "username": "bubu",
+  "email": "bubu@gmail.com",
+  "password": "12345",
+  "gender": "female",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653e6bea673929bc8249c8c6"
+  },
+  "username": "bubu123",
+  "email": "bubu123@gmail.com",
+  "password": "bubu123",
+  "gender": "female",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653e6c2c673929bc8249c8c8"
+  },
+  "username": "bubu",
+  "email": "bubu",
+  "password": "12345",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653e6c9b673929bc8249c8cc"
+  },
+  "username": "minmin",
+  "email": "minmin",
+  "password": "minmin",
+  "gender": "female",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653e7ab3d027f8b910e2ab75"
+  },
+  "username": "one",
+  "email": "one",
+  "password": "one",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65439a34bd738725f9ba7cc8"
+  },
+  "username": "han",
+  "email": "han",
+  "password": "han",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65463bbffbf92d8e49e411cf"
+  },
+  "username": "friday",
+  "email": "friday",
+  "password": "friday",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65463c07fbf92d8e49e411d3"
+  },
+  "username": "bubu888",
+  "email": "bubu888@gmail.com",
+  "password": "bubu888",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654640840fca687831c6afb6"
+  },
+  "username": "bubu8888",
+  "email": "bubu8888",
+  "password": "8888",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6548e4fcc6dbe1b5caa46241"
+  },
+  "username": "bubuh",
+  "email": "bubuh",
+  "password": "bubuh",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65839567a871e10ebd9e704d"
+  },
+  "username": "bbb",
+  "email": "bbb",
+  "password": "bbb",
+  "gender": "male",
+  "cart": [],
+  "__v": 7
+},
+{
+  "_id": {
+    "$oid": "658444f7f61a8a370b77a99a"
+  },
+  "username": "ccc",
+  "email": "ccc",
+  "password": "ccc",
+  "gender": "male",
+  "cart": [],
+  "__v": 3
+}]
