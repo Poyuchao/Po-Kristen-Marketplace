@@ -22,8 +22,10 @@ app.use(express.json()); // Middleware to parse JSON requests
 
 
 
-mongoose.connect('mongodb+srv://jiayuhsu8240:A1671821@cluster0.1xozqhw.mongodb.net/myDatabase?retryWrites=true&w=majority')
-  .then(() => {
+mongoose.connect('mongodb+srv://jiayuhsu8240:A1671821@cluster0.1xozqhw.mongodb.net/Customers?retryWrites=true&w=majority',
+{useNewUrlParser: true,
+useUnifiedTopology: true
+}).then(() => {
     console.log('Connected to MongoDB Atlas');
   })
   .catch(error => {
