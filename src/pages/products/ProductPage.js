@@ -40,14 +40,23 @@ const ProductPage = () => {
             .then(response => {
               // Check for unsuccessful network responses.
                 if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                    // throw new Error("Network response was not ok");
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.json();
+                // return response.json();
+                return response.text();
             })
-            .then(data => {
+            .then(text => {
               // Set the product data and mark the loading as finished.
+              try{
+                const data = JSON.parse(text);
                 setProducts(data);
                 setLoading(false);
+
+              }catch (error) {
+                throw new Error("Error parsing JSON");
+            }
+
             })
             .catch(err => {
               // Handle any errors that occurred during fetching.
