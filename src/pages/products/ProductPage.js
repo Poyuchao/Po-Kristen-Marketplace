@@ -33,9 +33,10 @@ const ProductPage = () => {
             }
 
 
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
         // Fetch product data from a local server running on port 3000.
-        fetch('http://localhost:3000/products')
+        fetch(`${apiUrl}/products`)
             .then(response => {
               // Check for unsuccessful network responses.
                 if (!response.ok) {
