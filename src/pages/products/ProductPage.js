@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from "react";
 import { useCart } from "../cart/CartContext"; // import use cart
 import { useLocation } from "react-router-dom"; 
@@ -33,30 +32,20 @@ const ProductPage = () => {
             }
 
 
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
         // Fetch product data from a local server running on port 3000.
-        fetch(`${apiUrl}/products`)
+        fetch('http://localhost:3000/products')
             .then(response => {
               // Check for unsuccessful network responses.
                 if (!response.ok) {
-                    // throw new Error("Network response was not ok");
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    throw new Error("Network response was not ok");
                 }
-                // return response.json();
-                return response.text();
+                return response.json();
             })
-            .then(text => {
+            .then(data => {
               // Set the product data and mark the loading as finished.
-              try{
-                const data = JSON.parse(text);
                 setProducts(data);
                 setLoading(false);
-
-              }catch (error) {
-                throw new Error("Error parsing JSON");
-            }
-
             })
             .catch(err => {
               // Handle any errors that occurred during fetching.
